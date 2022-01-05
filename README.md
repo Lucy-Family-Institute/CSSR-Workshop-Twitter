@@ -16,10 +16,10 @@ The workshop is planned with three sessions.
 
 Examples of pulling data from twitter:
 
-1: Timeline from certain accounts
-2: The tweets a certain user liked
-3: Tweets contain a certain hashtag and/or multiple hashtags
-4: Search tweets by a set of conditions(optional)
+1. Timeline from certain accounts
+2. The tweets a certain user liked
+3. Tweets contain a certain hashtag and/or multiple hashtags
+4. Search tweets by a set of conditions(optional)
 
 For those who are interested in the advanced techinics, there is code to show how to pull data and save it locally at the same time, this is espercially useful when the size of the pulled data is huge.
 
@@ -32,4 +32,4 @@ Here is an [example](https://www.w3schools.com/python/python_datatypes.asp) to i
 
 JSON data is a data type widely used for data exchange. Please read the [Intro](https://www.w3schools.com/js/js_json_intro.asp) and [JSON Parse](https://www.w3schools.com/js/js_json_intro.asp). This will help us perceive the twitter data parsing.
 
-Besides, we will also use two basic control flows in programming. It is helpful if you know the control flows in programming, but if not, [here] is a good intro on that. We will mostly use condition(*if...else...*) and loop(*for loop*) control.
+Besides, we will also use two basic control flows in programming. It is helpful if you know the control flows in programming, but if not, [here](https://docs.python.org/3/tutorial/controlflow.html) is a good intro on that. We will mostly use condition(*if...else...*) and loop(*for loop*) control.
