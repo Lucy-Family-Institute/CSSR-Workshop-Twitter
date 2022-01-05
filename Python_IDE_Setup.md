@@ -9,5 +9,6 @@ For Linux users, you probably won't need any suggestion.
 Link to Anaconda download: https://www.anaconda.com/products/individual
 
 The workshop will also require some packages that can be installed through pip or conda:
+
 1. tweepy
 2. pandas

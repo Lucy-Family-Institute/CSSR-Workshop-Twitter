@@ -27,3 +27,9 @@ For those who are interested in the advanced techinics, there is code to show ho
 ### Session 2: Parse twitter data
 
 The raw data that the twitter API returned shall be converted to json format first, then it will be preferably converted to a dataframe for the following analysis. The session 2 will show how-to. This requires some basic knowledge about data format about json, dict, list.
+
+Here is an [example](https://www.w3schools.com/python/python_datatypes.asp) to illustrate different data types in python. The data types we will need to deal with in this workshop are: str, int, float, list, tuple, dict, set and bool.
+
+JSON data is a data type widely used for data exchange. Please read the [Intro](https://www.w3schools.com/js/js_json_intro.asp) and [JSON Parse](https://www.w3schools.com/js/js_json_intro.asp). This will help us perceive the twitter data parsing.
+
+Besides, we will also use two basic control flows in programming. It is helpful if you know the control flows in programming, but if not, [here] is a good intro on that. We will mostly use condition(*if...else...*) and loop(*for loop*) control.
