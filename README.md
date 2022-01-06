@@ -21,7 +21,7 @@ Examples of pulling data from twitter:
 3. Tweets contain a certain hashtag and/or multiple hashtags
 4. Search tweets by a set of conditions(optional)
 
-For those who are interested in the advanced techinics, there is code to show how to pull data and save it locally at the same time, this is espercially useful when the size of the pulled data is huge.
+For those who are interested in the advanced techniques, there is code to show how to pull data and save it locally at the same time, this is especially useful when the size of the pulled data is huge.
 
 
 ### Session 2: Parse twitter data
@@ -36,3 +36,7 @@ Besides, we will also use two basic control flows in programming. It is helpful 
 
 
 ### Session 3: NLP Analysis
+
+Tweets often come with the real-time reactions to social events. Thus, the tweets we obtained carries many information. One of most common case is sentiment analysis, which will rate each tweet whether it's positive/native to a certain topic.
+
+The workshop will introduce a few NLP models for such task. Besides that, it is often useful to wrangle the data before analysis. E.g. single out links from the text body. The package **pandas** will be very powerful for data cleaning.
