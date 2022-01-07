@@ -26,7 +26,7 @@ For those who are interested in the advanced techniques, there is code to show h
 
 ### Session 2: Parse twitter data
 
-The raw data that the twitter API returned shall be converted to json format first, then it will be preferably converted to a dataframe for the subsequent analysis. The session 2 will show how-to. This requires some basic knowledge about data format about json, dict, list.
+The raw data that the twitter API returned shall be converted to json format first, then it will be preferably converted to a dataframe for the subsequent analysis. The session 2 will show how-to. This requires some basic knowledge about data format, such as: json, dict, list.
 
 Here is an [example](https://www.w3schools.com/python/python_datatypes.asp) to illustrate different data types in python. The data types we will need to deal with in this workshop are: str, int, float, list, tuple, dict, set and bool.
 
@@ -37,6 +37,6 @@ Besides, we will also use two basic control flows in programming. It is helpful 
 
 ### Session 3: NLP Analysis
 
-Tweets often come with the real-time reactions to social events. Thus, the tweets we obtained carries many information. One of most common case is sentiment analysis, which will rate each tweet whether it's positive/native to a certain topic.
+Tweets often come with the real-time reactions to social events. Thus, the tweets we obtained carries many information. One of most common cases is sentiment analysis, which will rate each tweet whether it's positive/native to a certain topic.
 
 The workshop will introduce a few NLP models for such task. Besides that, it is often useful to wrangle the data before analysis. E.g. single out links from the text body. The package **pandas** will be very powerful for data cleaning.
