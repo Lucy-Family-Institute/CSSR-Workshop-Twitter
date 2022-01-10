@@ -1,16 +1,43 @@
 # CSSR-Workshop-Twitter
+Author: Yang Xu(yxu6@nd.edu)
+
+## Overview
 
 This is the introduction for the Workshop offered by Lucy Family Institute-CSSR.
 
 The workshop introduces a series of handy projects on how to collect data from twitter, parse tweets and apply basic NLP(Natural Language Processing) analysis.
 
-Before any proceedings to work on codes and twitter data analysis, please refer to [Developer_Account](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/blob/master/Developer_Account.md) for the info of application. It is strongly recommended you to apply as soon as you sign up the workshop. The application can take days or weeks to be approved, and twitter might require further explanation after reviewing the initial application.
+## Prior Knowledge
 
-At the same time, you can refer to the [Python_IDE_Setup](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/blob/master/Python_IDE_Setup.md) to install the required apps.
+The workshop assumes the working knowledge of Python. There are the links to some Python basics below.
 
-Once you have the twitter developer account and Python IDE set up on your computer. You will be able to pull data from twitter.
+## Software Details
 
-The workshop is planned with three sessions.
+Make sure the Python3(recommended version 3.7 or later) and IDE(recommended Jupyter) are installed.
+
+You can refer to the [Python_IDE_Setup](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/blob/master/Python_IDE_Setup.md) to install the required apps.
+
+The packages the workshop will use are:
+1. tweepy
+2. pandas
+
+You can install them through pip or conda, but we can include that during the workshop.
+
+## IMPORTANT INFORMATION
+
+The twitter developer account is based on a regular twitter account. It is assumed you already have a regular twitter account. You will need to apply for a developer account before any proceedings to work on codes and twitter data analysis.
+
+Please refer to [Developer_Account](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/blob/master/Developer_Account.md) for the info of application. It is strongly recommended to apply as soon as you sign up the workshop. The application can take days or weeks to be approved, and twitter might require further explanation after reviewing the initial application.
+
+Once you have the twitter developer account and Python IDE set up on your computer. You are ready to pull data from twitter.
+
+## Workshop Plan and Dates
+The workshop is planned to spread out over three weeks with 1.5 hours sessions each week. Each workshop will cover a brief introduction, go through a few live demos. The instructor will answer questions and help with the bugs.
+
+Course Dates:
+1. Session 1: Wednesday, 3:30-5pm Feb.9 CDS Classroom 246
+2. Session 2: Wednesday, 3:30-5pm Feb.16 CDS Classroom 125
+3. Session 3: Wednesday, 3:30-5pm Feb.23 CDS Classroom 246
 
 ### Session 1: Set up and twitter data pull
 
@@ -18,7 +45,7 @@ Examples of pulling data from twitter:
 
 1. Timeline from certain accounts
 2. The tweets a certain user liked
-3. Tweets contain a certain hashtag and/or multiple hashtags
+3. Tweets contain a certain hashtag or multiple hashtags
 4. Search tweets by a set of conditions(optional)
 
 For those who are interested in the advanced techniques, there is code to show how to pull data and save it locally at the same time, this is especially useful when the size of the pulled data is huge.
@@ -40,3 +67,11 @@ Besides, we will also use two basic control flows in programming. It is helpful 
 Tweets often come with the real-time reactions to social events. Thus, the tweets we obtained carries many information. One of most common cases is sentiment analysis, which will rate each tweet whether it's positive/native to a certain topic.
 
 The workshop will introduce a few NLP models for such task. Besides that, it is often useful to wrangle the data before analysis. E.g. single out links from the text body. The package **pandas** will be very powerful for data cleaning.
+
+## Course Attendance and Delivery
+
+To make sure the workshop meets its expectation, registration is required with a maxium capacity of 15.
+
+The workshop is voluntary, but each session builds off of the previous session and so if missing any session you might need to catch-up on your own.
+
+The workshop will be completely in person. All materials will be shared via Github.

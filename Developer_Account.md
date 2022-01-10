@@ -4,6 +4,6 @@ NOTE: After submitting the application, it can take days to weeks for Twitter to
 
 1. A twitter developer account is associated with the twitter account of the user. Thus you need a twitter account before application.
 
-2. Log in developers.twitter.com, - Apply for a Developer Account
+2. Log in [here](developers.twitter.com), - Apply for a Developer Account
 
 3. There are three levels of developer accounts that comes with no charge: Essential, Elevated, Academic Research. Each has its requirement for applicants, please read and apply based on your situation. The Academic Research offers the maximum amount of tweets and flexibility.
