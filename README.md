@@ -23,7 +23,7 @@ The packages the workshop will use are:
 
 You can install them through pip or conda, but we can include that during the workshop.
 
-## - ![#f03c15]IMPORTANT INFORMATION `#f03c15`
+## - ![#f03c15](IMPORTANT INFORMATION) `#f03c15`
 
 The twitter developer account is a must-have. The developer account based on a regular twitter account. It is assumed you already have a regular twitter account. You will need to apply for a developer account before any proceedings to work on codes and twitter data analysis.
 
