@@ -25,9 +25,9 @@ You can install them through pip or conda, but we can include that during the wo
 
 ## IMPORTANT INFORMATION
 
-The twitter developer account is based on a regular twitter account. It is assumed you already have a regular twitter account. You will need to apply for a developer account before any proceedings to work on codes and twitter data analysis.
+The twitter developer account is a must-have. The developer account based on a regular twitter account. It is assumed you already have a regular twitter account. You will need to apply for a developer account before any proceedings to work on codes and twitter data analysis.
 
-Please refer to [Developer_Account](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/blob/master/Developer_Account.md) for the info of application. It is strongly recommended to apply as soon as you sign up the workshop. The application can take days or weeks to be approved, and twitter might require further explanation after reviewing the initial application.
+Please refer to [Developer_Account](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/blob/master/Developer_Account.md) for the info of application. It is **strongly recommended** to apply as soon as you sign up the workshop. The application can take days or weeks to be approved, and twitter might require further explanation after reviewing the initial application.
 
 Once you have the twitter developer account and Python IDE set up on your computer. You are ready to pull data from twitter.
 
