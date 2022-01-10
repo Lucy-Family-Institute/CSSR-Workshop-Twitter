@@ -9,7 +9,7 @@ Please refer to [Developer_Account](https://github.com/Lucy-Family-Institute/CSS
 
 ## Overview
 
-This is the introduction for the Workshop offered by Lucy Family Institute-CSSR.
+This is the introduction of the Workshop offered by Lucy Family Institute-CSSR.
 
 Twitter is a social media where people share news, attitudes and immediate reactions to social events. Twitter offers an API to researchers to collect data. The API allows users to define their own conditions for data retrieval, such as keywords, date range, is retweet or not, reply or mention a certain user etc.
 
