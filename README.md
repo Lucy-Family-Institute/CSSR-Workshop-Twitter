@@ -39,9 +39,11 @@ You can install them through pip or conda. We can include this in the first sess
 Once you have the twitter developer account and Python IDE set up on your computer. You are ready to pull data from twitter.
 
 ## Workshop Plan and Dates
+
 The workshop is planned to spread out over three weeks with 1.5 hours sessions each week. Each workshop will cover a brief introduction, go through a few live demos. The instructor will answer questions and help with the bugs.
 
 ### Course Dates:
+
 1. Session 1: Wednesday, 3:30-5pm Feb.9 CDS Classroom 246
 2. Session 2: Wednesday, 3:30-5pm Feb.16 CDS Classroom 125
 3. Session 3: Wednesday, 3:30-5pm Feb.23 CDS Classroom 246

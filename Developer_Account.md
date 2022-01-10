@@ -4,11 +4,11 @@ NOTE: After submitting the application, it can take days to weeks for Twitter to
 
 1. A twitter developer account is associated with the twitter account of the user. Thus you need a twitter account before application.
 
-2. Log in [here](https://developers.twitter.com), - Apply for a Developer Account
+2. Log in [here](https://developers.twitter.com). Log in with your regular twitter account  then apply for a Developer Account
 
 3. There are three levels of developer accounts that comes with no charge: Essential, Elevated, Academic Research. Each has its requirement for applicants, please read and apply based on your situation. The Academic Research offers the maximum amount of tweets and flexibility.
 
-There are a few questions that you need to answer:
+There are a few questions that you need to answer, the appended answers below are for your reference.
 
 1. In your words: In English, please describe how you plan to use Twitter data and/or APIs. For students and teachers, please include the name of the school, the name of the instructor and the course number (if available). The more detailed the response, the easier it is to review and approve.
 
@@ -37,4 +37,4 @@ Note this question is asking whether you will use the API to post tweets, retwee
 8. Will your product, service or analysis make Twitter content or derived information available to a government entity?
 > Answer for reference: No
 
-Note: Twitter is very strict about sharing data with any government entity, if you plan to make the acquired data and any deriving analysis available to any government entity, please explain in greatest detail.
+Note: Twitter is extremely strict about sharing data with any government entity. If you plan to make the acquired data and any deriving analysis available to any government entity, please explain in greatest detail.
