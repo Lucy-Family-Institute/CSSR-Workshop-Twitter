@@ -34,7 +34,7 @@ The packages this workshop will use are:
 1. tweepy
 2. pandas
 
-You can install them through pip or conda. We can include this in the first session of the workshop.
+You can install them through pip3 or conda. We can include this in the first session of the workshop.
 
 Once you have the twitter developer account and Python IDE set up on your computer. You are ready to pull data from twitter.
 
