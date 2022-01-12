@@ -6,13 +6,13 @@ NOTE: After submitting the application, it can take days to weeks for Twitter to
 
 2. Log in [here](https://developers.twitter.com). Log in with your regular twitter account  then apply for a Developer Account
 
-3. There are three levels of developer accounts that comes with no charge: Essential, Elevated, Academic Research. Each has its requirement for applicants, please read and apply based on your situation. The Academic Research offers the maximum amount of tweets and flexibility.
+3. There are three levels of developer accounts that comes with no charge: Essential, Elevated, Academic Research. Each has its requirement for applicants, please read and apply based on your situation. The Academic Research offers the maximum quota of tweets and more functionality.
 
 There are a few questions that you need to answer, the appended answers below are for your reference.
 
 1. In your words: In English, please describe how you plan to use Twitter data and/or APIs. For students and teachers, please include the name of the school, the name of the instructor and the course number (if available). The more detailed the response, the easier it is to review and approve.
 
-> Answer for reference: I'm hosting a workshop to introduce how to use twitter developer account to pull data through twitter API. Participants (mostly undergraduate and graduate students) will learn how to pull data for their research, and applying text analysis and NLP model to do sentiment analysis.
+> Answer for reference: I'm hosting a workshop to introduce how to use twitter developer account to pull data through twitter API at the Univerisity of Notre Dame during the 2022 Spring Semester. Participants (mostly undergraduate and graduate students) will learn how to pull data for their research, and applying text analysis and NLP model to do sentiment analysis.
 
 2. Are you planning to analyze Twitter data?
 > Answer for reference: Yes
