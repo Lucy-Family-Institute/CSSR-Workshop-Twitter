@@ -13,7 +13,7 @@ This is the introduction of the Workshop offered by Lucy Family Institute-CSSR.
 
 Twitter is a social media where people share news, attitudes and immediate reactions to social events. Twitter offers an API to researchers to collect data. The API allows users to define their own conditions for data retrieval, such as keywords, date range, is retweet or not, reply or mention a certain user etc.
 
-The workshop introduces a series of handy projects on how to collect data from twitter, parse tweets and apply basic NLP(Natural Language Processing) analysis.
+The workshop introduces a series of hands-on projects on how to collect data from twitter, parse tweets and apply basic NLP(Natural Language Processing) analysis.
 
 Participants will learn:
 1. How to set up code and pull data through twitter API, save data locally. (Feb.9)
@@ -55,7 +55,7 @@ Examples of pulling data from twitter:
 1. Timeline from certain accounts
 2. The tweets a certain user liked
 3. Tweets contain a certain hashtag or multiple hashtags
-4. Search tweets by a set of conditions(optional)
+4. Search tweets by a set of conditions(time-permitting)
 
 For those who are interested in the advanced techniques, there is code to show how to pull data and save it locally at the same time, this is especially useful when the size of the pulled data is huge.
 
