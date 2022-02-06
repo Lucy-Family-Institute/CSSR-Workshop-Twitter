@@ -49,8 +49,8 @@
   > - ```error```
   > - ```includes```
   >
-  >   - ```user```
-  >   * ```tweet```
+  >    * ```user```
+  >    * ```tweet```
   >
   > - ```meta```
   > 3. Request additional fields
