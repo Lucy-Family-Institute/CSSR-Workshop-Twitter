@@ -62,8 +62,8 @@
   >     - ```referenced_tweets```
   >  * [Full Twitter Fields and Explanation](https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet)
   > 4. Expansions
-    * To request the reference tweets data. Referenced tweets are quoted tweets or the tweets that are replied to.
-    * An example:
+  >   * To request the reference tweets data. Referenced tweets are quoted tweets or the tweets that are replied to.
+  >   * An example:
   >   
   > ![Quoted Tweets](source/QuotedTweet.png)
   >
@@ -78,7 +78,7 @@
 
    > - use **search_recent_tweets()** (essential or elevated account)
      - allow to pull data within the last 7 days
-   > - or use search_all_tweet() (academic research account)
+   > - or use **search_all_tweet()** (academic research account)
      - allow to pull the full-archive data of twitter, back to 2006
    > - Simple query: hashtag only
 
@@ -86,7 +86,7 @@
 
    > - use **search_recent_tweets()** (essential or elevated account)
      - allow to pull data within the last 7 days
-   > - or use search_all_tweet() (academic research account)
+   > - or use **search_all_tweet()** (academic research account)
      - allow to pull the full-archive data of twitter, back to 2006
    > 1. Building Query
    >    - ```keyword```
