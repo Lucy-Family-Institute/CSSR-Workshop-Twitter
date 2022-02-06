@@ -43,16 +43,16 @@
    > - To pull more than 3200 tweets of user's timeline, use search_all_tweets and query operators.
 
 ## Tweet API Basics
-    > 1. By default, the API only returns the ```id``` and the ```text``` fields.
-    > 2. Tweepy Response
-    
+  > 1. By default, the API only returns the ```id``` and the ```text``` fields.
+  > 2. Tweepy Response
+
         > - ```data```
         > - ```error```
         > - ```includes```
             > * ```user```
             > * ```tweet```
         > - ```meta```
-   > 3. Request additional fields
+  > 3. Request additional fields
     - ```author_id```
     - ```context_annotations```
     - ```conversation_id```
