@@ -20,11 +20,11 @@
 > ![404](source/google404.webp)
 > 1. Successful responses: 200(Successful)
 > 2. Client error response: 401(Unauthorized), 403(Forbidden), 404(Not Found)
-      - Response Status Code starting with 4 means the client end has error(s).
-      - Check the request detail
+>     - Response Status Code starting with 4 means the client end has error(s).
+>     - Check the request detail
 > 3. Server error response: 500(Internal Server Error), 503(Service Unavailable)
-      - Response Status Code starting with 5 means the server end(Twitter Server) has error(s).
-      - Nothing you can do about it, wait and retry
+>     - Response Status Code starting with 5 means the server end(Twitter Server) has error(s).
+>     - Nothing you can do about it, wait and retry
 
 ## Tweet Cap and Rate Limit
 > **Twitter Limits How Much and How Frequent You Can Request Data**
