@@ -17,7 +17,7 @@
 >  #### How is HTTP related to Twitter API?
 >  The data pulling through Twitter API follows HTTP protocol. It is very useful for debugging when the API returns error message.
 > #### Frequent HTTP Status Code:
-![404](source/google404.webp)
+> ![404](source/google404.webp)
 > 1. Successful responses: 200(Successful)
 > 2. Client error response: 401(Unauthorized), 403(Forbidden), 404(Not Found)
      - Response Status Code starting with 4 means the client end has error(s).
