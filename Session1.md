@@ -45,6 +45,7 @@
 ## Tweet API Basics
   > 1. By default, the API only returns the ```id``` and the ```text``` fields.
   > 2. Tweepy Response
+  
     - ```data```
     - ```error```
     - ```includes```
