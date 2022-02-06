@@ -31,14 +31,16 @@
 > 1. [Monthly Tweet Cap](https://developer.twitter.com/en/portal/dashboard)
 > 2. [Rate Limit](https://developer.twitter.com/en/portal/products)
 
+## Packages Import
+> 1. [Tweepy](https://docs.tweepy.org/en/stable/getting_started.html): the package to build connection to Twitter API
+> 2. [Pandas](https://pandas.pydata.org/docs/getting_started/overview.html): the package for data processing
+
 ## Example 1: Pull Elon Musk's Timeline
    [Elon Musk Tweets](https://twitter.com/elonmusk)
 
-   There is a cap of 3200 tweets for pulling a certain user's timeline.
-
-   Each request allows a maximum of 100 tweets, use for loop to send multiple requests.
-
-   To pull more than 3200 tweets of user's timeline, use search_all_tweets and query operators.
+   > - There is a cap of 3200 tweets for pulling a certain user's timeline.
+   > - Each request allows a maximum of 100 tweets, use for loop to send multiple requests.
+   > - To pull more than 3200 tweets of user's timeline, use search_all_tweets and query operators.
 
 ## Tweet API Basics
 1. By default, the API only returns the ```id``` and the ```text``` fields.
@@ -60,6 +62,8 @@
     - ```in_reply_to_user_id```
     - ```public_metrics```
     - ```referenced_tweets```
+
+  [Full Twitter Fields](https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet)
 4. Expansions
    An example:
 
@@ -69,11 +73,25 @@
 
 ## Example 2: Pull Tweets Taylor Swift liked
 
-   > There is a cap of 3200 tweets for pulling a certain user's timeline.
-   > Each request allows a maximum of 100 tweets, use for loop to send multiple requests.
-   > To pull more than 3200 tweets of user's timeline, use search_all_tweets and query operators.
+   > - Allows you to get information about a user’s liked Tweets.
+   > - use function **get_liked_tweets**
 
-5. Query
+## Example 3: Pull Tweets that contains #GoIrish
+
+   > - use **search_recent_tweets()** (essential or elevated account)
+     - allow to pull data within the last 7 days
+   > - or use search_all_tweet() (academic research account)
+     - allow to pull the full-archive data of twitter, back to 2006
+   > - Simple query only hashtag only
+
+## Example 4: Pull Tweets about Justice Breyer's retirement
+
+   > - use **search_recent_tweets()** (essential or elevated account)
+     - allow to pull data within the last 7 days
+   > - or use search_all_tweet() (academic research account)
+     - allow to pull the full-archive data of twitter, back to 2006
+
+1. Building Query
     - ```keyword```
     - ```"exact phrase match"```
     - ```#```
@@ -85,9 +103,19 @@
     - ```is:quote```
     - ```negation```
 
+
+2. Specify periods
+    - Date and time format (ISO 8601/RFC 3339) with 24h-clock. UTC timezone.
+      - ``` YYYY-MM-DDTHH:mm:ssZ ```
+      - ``` 2022-01-31T00:00:01Z ```
+      - ``` 2022-02-01T23:59:59Z ```
+    - Note the date specified above is in UTC timezone, you will need to convert time from local time to UTC
+      - e.g. ```ET 2022-01-31 00:00:01``` -> ```2022-01-31T05:00:01Z```
+
+
   [Full Query Parameters](https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query)
 
 
 ### End
 
-  [Submit questions and issues here](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/issues)
+  ####  [Submit questions and issues here](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/issues) ####
