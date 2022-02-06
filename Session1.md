@@ -60,7 +60,7 @@
   >     - ```in_reply_to_user_id```
   >     - ```public_metrics```
   >     - ```referenced_tweets```
-  >         * [Full Twitter Fields and Explanation](https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet)
+  >  * [Full Twitter Fields and Explanation](https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet)
   > 4. Expansions
     * To request the reference tweets data. Referenced tweets are quoted tweets or the tweets that are replied to.
     * An example:
@@ -89,24 +89,24 @@
    > - or use search_all_tweet() (academic research account)
      - allow to pull the full-archive data of twitter, back to 2006
    > 1. Building Query
-        - ```keyword```
-        - ```"exact phrase match"```
-        - ```#```
-        - ```@```
-        - ```from:	```
-        - ```to:```
-        - ```conversation_id:```
-        - ```is:retweet```
-        - ```is:quote```
-        - ```negation```
+   >    - ```keyword```
+   >    - ```"exact phrase match"```
+   >    - ```#```
+   >    - ```@```
+   >    - ```from:	```
+   >    - ```to:```
+   >    - ```conversation_id:```
+   >    - ```is:retweet```
+   >    - ```is:quote```
+   >    - ```negation```
 > 2. Specify Periods
-    - Date and time format (ISO 8601/RFC 3339) with 24h-clock. UTC timezone.
-      - ``` YYYY-MM-DDTHH:mm:ssZ ```
-      - ``` 2022-01-31T00:00:01Z ```
-      - ``` 2022-02-01T23:59:59Z ```
-    - Note the date specified above is in UTC timezone, you will need to convert time from local time to UTC
-      - e.g. ```ET 2022-01-31 00:00:01``` -> ```UTC 2022-01-31T05:00:01Z```
-  > * [Full Query Parameters](https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query)
+   > - Date and time format (ISO 8601/RFC 3339) with 24h-clock. UTC timezone.
+   >   - ``` YYYY-MM-DDTHH:mm:ssZ ```
+   >   - ``` 2022-01-31T00:00:01Z ```
+   >   - ``` 2022-02-01T23:59:59Z ```
+   >   - Note the date specified above is in UTC timezone, you will need to convert time from local time to UTC
+   >       - e.g. ```ET 2022-01-31 00:00:01``` -> ```UTC 2022-01-31T05:00:01Z```
+   > * [Full Query Parameters](https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query)
 
 
 ### End
