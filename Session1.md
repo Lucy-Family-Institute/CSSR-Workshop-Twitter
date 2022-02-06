@@ -5,10 +5,10 @@
 > 2. Understanding HTTP, interacting with API
 > 3. Set up API credentials
 > 4. Live coding to pull tweets
-    - What Elon Musk tweeted
-    - What kind of tweets that Taylor Swift liked
-    - Tweets related to ND Sports with hashtag #GoIrish
-    - What are people talking about Justice Breyer's retirement (Time Permitting)
+      - What Elon Musk tweeted
+      - What kind of tweets that Taylor Swift liked
+      - Tweets related to ND Sports with hashtag #GoIrish
+      - What are people talking about Justice Breyer's retirement (Time Permitting)
 
 
 ## HTTP and 404
@@ -20,11 +20,11 @@
 > ![404](source/google404.webp)
 > 1. Successful responses: 200(Successful)
 > 2. Client error response: 401(Unauthorized), 403(Forbidden), 404(Not Found)
-     - Response Status Code starting with 4 means the client end has error(s).
-     - Check the request detail
+      - Response Status Code starting with 4 means the client end has error(s).
+      - Check the request detail
 > 3. Server error response: 500(Internal Server Error), 503(Service Unavailable)
-     - Response Status Code starting with 5 means the server end(Twitter Server) has error(s).
-     - Nothing you can do about it, wait and retry
+      - Response Status Code starting with 5 means the server end(Twitter Server) has error(s).
+      - Nothing you can do about it, wait and retry
 
 ## Tweet Cap and Rate Limit
 > **Twitter Limits How Much and How Frequent You Can Request Data**
@@ -40,7 +40,7 @@
 
    > - There is a cap of 3200 tweets for pulling a certain user's timeline.
    > - Each request allows a maximum of 100 tweets, use for loop to send multiple requests.
-   > - To pull more than 3200 tweets of user's timeline, use search_all_tweets and query operators.
+   > - To pull more than 3200 tweets of user's timeline, use **search_all_tweets** and query operators.
 
 ## Tweet API Basics
   > 1. By default, the API only returns the ```id``` and the ```text``` fields.
