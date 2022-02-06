@@ -4,7 +4,7 @@
 1. [Install Python IDE, packages](Python_IDE_Setup.md)
 2. Understanding HTTP, interacting with API
 3. Set up API credentials
-4. Live code to pull data
+4. Live coding to pull tweets
     - What Elon Musk tweeted
     - What kind of tweets that Taylor Swift liked
     - Tweets related to ND Sports with hashtag #GoIrish
@@ -63,8 +63,9 @@
     - ```public_metrics```
     - ```referenced_tweets```
 
-  [Full Twitter Fields](https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet)
-  
+    
+  * [Full Twitter Fields and Explanation](https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet)
+
 4. Expansions
 
    An example:
@@ -115,7 +116,7 @@
       - e.g. ```ET 2022-01-31 00:00:01``` -> ```2022-01-31T05:00:01Z```
 
 
-  [Full Query Parameters](https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query)
+  * [Full Query Parameters](https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query)
 
 
 ### End
