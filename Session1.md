@@ -48,18 +48,20 @@
   > - ```data```
   > - ```error```
   > - ```includes```
-      > * ```user```
-      > * ```tweet```
+  >
+  >   - ```user```
+  >   * ```tweet```
+  >
   > - ```meta```
   > 3. Request additional fields
-    - ```author_id```
-    - ```context_annotations```
-    - ```conversation_id```
-    - ```created_at```
-    - ```entities```
-    - ```in_reply_to_user_id```
-    - ```public_metrics```
-    - ```referenced_tweets```
+  > - ```author_id```
+  > - ```context_annotations```
+  > - ```conversation_id```
+  > - ```created_at```
+  > - ```entities```
+  > - ```in_reply_to_user_id```
+  > - ```public_metrics```
+  > - ```referenced_tweets```
   > * [Full Twitter Fields and Explanation](https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet)
   > 4. Expansions
     * To request the reference tweets data. Referenced tweets are quoted tweets or the tweets that are replied to.
