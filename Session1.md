@@ -65,18 +65,19 @@
 
   [Full Twitter Fields](https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet)
 4. Expansions
+
    An example:
 
    ![Quoted Tweets](source/QuotedTweet.png)
 
    ![Expansions](source/Expansions.png)
 
-## Example 2: Pull Tweets Taylor Swift liked
+## Example 2: Pull Tweets Taylor Swift Liked
 
    > - Allows you to get information about a user’s liked Tweets.
    > - use function **get_liked_tweets**
 
-## Example 3: Pull Tweets that contains #GoIrish
+## Example 3: Pull Tweets Contains #GoIrish
 
    > - use **search_recent_tweets()** (essential or elevated account)
      - allow to pull data within the last 7 days
@@ -84,7 +85,7 @@
      - allow to pull the full-archive data of twitter, back to 2006
    > - Simple query only hashtag only
 
-## Example 4: Pull Tweets about Justice Breyer's retirement
+## Example 4: Pull Tweets about Justice Breyer's Retirement
 
    > - use **search_recent_tweets()** (essential or elevated account)
      - allow to pull data within the last 7 days
@@ -104,7 +105,7 @@
     - ```negation```
 
 
-2. Specify periods
+2. Specify Periods
     - Date and time format (ISO 8601/RFC 3339) with 24h-clock. UTC timezone.
       - ``` YYYY-MM-DDTHH:mm:ssZ ```
       - ``` 2022-01-31T00:00:01Z ```
