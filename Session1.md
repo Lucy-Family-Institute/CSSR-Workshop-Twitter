@@ -5,10 +5,10 @@
 > 2. Understanding HTTP, interacting with API
 > 3. Set up API credentials
 > 4. Live coding to pull tweets
-      - What Elon Musk tweeted
-      - What kind of tweets that Taylor Swift liked
-      - Tweets related to ND Sports with hashtag #GoIrish
-      - What are people talking about Justice Breyer's retirement (Time Permitting)
+>    - What Elon Musk tweeted
+>    - What kind of tweets that Taylor Swift liked
+>    - Tweets related to ND Sports with hashtag #GoIrish
+>    - What are people talking about Justice Breyer's retirement (Time Permitting)
 
 
 ## HTTP and 404
