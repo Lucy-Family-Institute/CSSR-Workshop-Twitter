@@ -39,7 +39,7 @@
    [Elon Musk Tweets](https://twitter.com/elonmusk)
 
    > - There is a cap of 3200 tweets for pulling a certain user's timeline.
-   > - Each request allows a maximum of 100 tweets, use for loop to send multiple requests.
+   > - Each request allows a maximum of 100 tweets, use for loop and ```next_token``` to send sequential requests
    > - To pull more than 3200 tweets of user's timeline, use **search_all_tweets** and query operators.
 
 ## Tweet API Basics
@@ -65,8 +65,9 @@
   >   * To request the reference tweets data. Referenced tweets are quoted tweets or the tweets that are replied to.
   >   * An example:
   >   
-  > ![Quoted Tweets](source/QuotedTweet.png)
+  > [Example: Quoted Tweets](https://twitter.com/elonmusk/status/1489340604215615492)
   >
+  > Available Expansions:
   > ![Expansions](source/Expansions.png)
 
 ## Example 2: Pull Tweets Taylor Swift Liked
