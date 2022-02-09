@@ -18,7 +18,7 @@ The workshop introduces a series of hands-on projects on how to collect data fro
 Participants will learn:
 1. How to set up code and pull data through twitter API, save data locally. (Feb.9)
 2. Wrangle and clean the raw data. (Feb.16)
-3. Apply NLP(Natural Language Processing) model, such as sentimental analysis. (Feb.23)
+3. Apply NLP(Natural Language Processing) model, such as sentiment analysis. (Feb.23)
 
 ## Prior Knowledge
 
