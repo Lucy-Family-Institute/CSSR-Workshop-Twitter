@@ -30,12 +30,12 @@
 
 ## Parse
 > **When parsing data, or any data wrangling, keep in mind what the data type is, and which type to convert to.**
-> ### Understanding **json** data ###
->     - A common use of JSON is to exchange data to/from a web server.
->     - When receiving data from a web server, the data is always a string.
->     - use ```ast.literal_eval()``` to convert the string first
->     - ideally the converted data type should be **dict**, which can be easily flattened
->     - use ```pd.json_normalize()``` to flatten the
+> ### Understanding **JSON** Data ###
+>    - A common use of JSON is to exchange data to/from a web server.
+>    - When receiving data from a web server, the data is always a string.
+>    - use ```ast.literal_eval()``` to convert the string first
+>    - ideally the converted data type should be **dict**, which can be easily flattened
+>    - use ```pd.json_normalize()``` to flatten the
 >
 > ### Define Function ###
 >     - Define function that can parse each of the entries and return the parsed data
