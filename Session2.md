@@ -27,6 +27,7 @@
 > Further checking out by indexing
 >    - ```raw_data.loc[0,"context_annotations"]```
 >    - ```raw_data.iloc[0,1]```
+>    - Notice that one tweet can have multiple annotations. It is a better practice to parse the column to a separate dataframe
 
 ## Parse
 > **When parsing data, or any data wrangling, keep in mind what the data type is, and which type to convert to.**
