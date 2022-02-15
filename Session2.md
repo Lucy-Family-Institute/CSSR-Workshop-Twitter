@@ -1,11 +1,20 @@
 # Session 2 Notes
 
+## Preparation
+> By now you should be able to pull data through Twitter API
+>
+> The data should be consisted of 4 files:
+>    - **raw_data**: pulled tweets based on the request
+>    - **raw_reference_tweets**: contains tweets that have been referenced by the tweets in the **raw_data**
+>    - **raw_errors**: error messages when pulling tweets
+>    - **raw_meta**: meta data generated when pulling tweets
+
 ## Plan for Today
-> 1. Parse context annotations, entities
-> 2. Parse public metrics
-> 3. Merge Data & Includes
-> 4. Convert created_at
-> 5. Convert referenced_tweet
+> 1. Load and explore data
+> 2. Parse **context annotations**, **entities**
+> 3. Parse **referenced_tweet**, **public metrics**
+> 4. Convert **created_at**
+> 5. Merge **raw_data** & **raw_reference_data**
 > 6. Filter data by condition
 
 ## Explore
@@ -24,9 +33,11 @@
 >    - ```raw_data.head()```
 >    - It is often useful to check a few rows so we have an idea what the data look like
 >
-> Further checking out by indexing
+> Further checking by indexing
 >    - ```raw_data.loc[0,"context_annotations"]```
+>    - loc-indexing can used with conditions, column name, row numbers
 >    - ```raw_data.iloc[0,1]```
+>    - iloc-indexing is only used for both row-number and column-number indexing
 >    - Notice that one tweet can have multiple annotations. It is a better practice to parse the column to a separate dataframe
 
 ## Parse
@@ -35,7 +46,7 @@
 >    - A common use of JSON is to exchange data to/from a web server.
 >    - When receiving data from a web server, the data is always a string.
 >    - use ```ast.literal_eval()``` to convert the string first
->    - ideally the converted data type should be **dict**, which can be easily flattened
+>    - ideally the converted data type should be **dict** or **list**, which can be easily flattened
 >    - use ```pd.json_normalize()``` to flatten the
 >
 > #### Define Function ####
@@ -43,6 +54,7 @@
 >    - The function will process data explained above
 >
 > #### Vectorize Function ####
+> Why we need to vectorize a function?
 >    - Vectorization could simplify the code
 >    - Vectorization will take array as the input instead of single entry
 >    - use ```np.vectorize()```
