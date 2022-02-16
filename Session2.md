@@ -20,7 +20,7 @@
 > 2. Parse **context annotations**, **entities**
 > 3. Parse **referenced_tweet**, **public metrics**
 > 4. Convert **created_at**
-> 5. Merge **raw_data** & **raw_reference_data**
+> 5. Merge **raw_data** & **raw_reference_tweets**
 > 6. Filter data by condition
 
 ## Context Annotations and Entities
