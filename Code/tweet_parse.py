@@ -9,7 +9,6 @@ import pandas as pd
 import os, json
 import numpy as np
 import time
-import yaml
 import ast
 from datetime import timezone
 
@@ -18,8 +17,8 @@ os.getcwd()
 
 ##### read the saved data
 raw_data = pd.read_csv('./Data/Breyer_data_2022_02.csv',sep='\t',dtype=object).dropna(subset=['id'])
-raw_reference_users = pd.read_csv('./Data/Breyer_reference_users_2022_02.csv',sep='\t',dtype=object).dropna(subset=['id'])
 raw_reference_tweets = pd.read_csv('./Data/Breyer_reference_tweets_2022_02.csv',sep='\t',dtype=object).dropna(subset=['id'])
+raw_reference_users = pd.read_csv('./Data/Breyer_reference_users_2022_02.csv',sep='\t',dtype=object).dropna(subset=['id'])
 raw_error = pd.read_csv('./Data/Breyer_errors_2022_02.csv',sep='\t',dtype=object)
 raw_meta = pd.read_csv('./Data/Breyer_meta_2022_02.csv',sep='\t',dtype=object)
 
@@ -53,7 +52,7 @@ type(temp_json)
 pd.json_normalize(temp_json['annotations'],sep="_")
 pd.json_normalize(temp_json['urls'],sep="_")
 
-raw_data
+raw_data.head()
 
 #### define functions to parse the json data
 def context_flatten(id,context_annotations):
@@ -143,21 +142,30 @@ cashtags_data.reset_index(level=1,drop=True).reset_index(level=0)
 
 raw_data = raw_data.drop(['context_annotations','entities'],axis=1)
 
+raw_reference_tweets.head()
+
+#### Practice: Parse raw_include on your own
+#### Item1: parse column context_annotations into another dataframe called: reference_context_data
+#### Item2: parse column entities into another two dataframes called: reference_annotations_data and reference_url_data
+#### Item3: parse column referenced_tweets into another two columns: referenced_id and referenced_tweets, then delete column: referenced_tweets
+#### Item4: parse column public_metrics into another four columns: retweet_count, reply_count, like_count, quote_count, then delete column: public_metrics
+
 #### parse column referenced_tweets into two columns: referenced_id, referenced_type
-temp = raw_data.loc[~raw_data.referenced_tweets.isna(),'referenced_tweets']
+temp = raw_data.loc[~raw_data.referenced_tweets.isna(),['id','referenced_tweets']]
 temp
 temp = raw_data.loc[0,'referenced_tweets']
 temp
 type(temp)
 
 raw_data[['referenced_id','referenced_type']] = raw_data.referenced_tweets.str.extract(r"id=(\d+)\s\w+=(\w+)", expand=True).rename(columns={0:"referenced_id",1:"referenced_type"})
-
+raw_data.loc[~raw_data.referenced_tweets.isna(),['referenced_tweets','referenced_id','referenced_type']]
 #### then delete the original column referenced_tweets
 raw_data = raw_data.drop('referenced_tweets', axis=1)
 
 #### parse public metrics into 4 columns: retweet_count, reply_count, like_count, quote_count
 raw_data.loc[0,'public_metrics']
 raw_data[['retweet_count','reply_count','like_count','quote_count']] = raw_data.public_metrics.str.extract(r"\s(\d+),.*\s(\d+),.*\s(\d+),.*\s(\d+)",expand=True).astype(int)
+raw_data[['public_metrics','retweet_count','reply_count','like_count','quote_count']]
 #### then delete the original column public_metrics
 raw_data = raw_data.drop('public_metrics', axis=1)
 #### summarize the four new columns
@@ -172,20 +180,23 @@ raw_data['created_at']
 dst_test = pd.Series(['2022-03-13T06:00:01Z','2022-03-13T07:00:01Z','2022-03-13T08:00:01Z'])
 pd.to_datetime(dst_test).dt.tz_convert('US/Eastern')
 
-#### Practice: Parse raw_include on your own
-#### Item1: parse column context_annotations into another dataframe called: reference_context_data
-#### Item2: parse column entities into another two dataframes called: reference_annotations_data and reference_url_data
-#### Item3: parse column referenced_tweets into another two columns: referenced_id and referenced_tweets, then delete column: referenced_tweets
-#### Item4: parse column public_metrics into another four columns: retweet_count, reply_count, like_count, quote_count, then delete column: public_metrics
 raw_reference_tweets.describe().T
 raw_reference_tweets.head()
 
+#### Practice: Parse raw_reference_tweets on your own
+#### Item3: parse column referenced_tweets into another two columns: referenced_id and referenced_tweets, then delete column: referenced_tweets
+#### Item4: parse column public_metrics into another four columns: retweet_count, reply_count, like_count, quote_count, then delete column: public_metrics
+#### Item5: convert column created_at to US Eastern Time
 raw_data
 raw_reference_tweets
+
+
 #### merge raw_data with referenced_tweets
 raw_reference_tweets_subset = raw_reference_tweets[['id','text']].rename(columns={'id':'referenced_id','text':'referenced_text'}).drop_duplicates(subset=['referenced_id'])
 data_with_referenced_text = raw_data.merge(raw_reference_tweets_subset, how='left', on='referenced_id')
+data_with_referenced_text[['id','text','referenced_text']]
 data_with_referenced_text['all_text'] = data_with_referenced_text.text +" "+ data_with_referenced_text.referenced_text.fillna('')
+data_with_referenced_text[['id','text','referenced_text','all_text']]
 data_with_referenced_text.loc[0,'all_text']
 data_with_referenced_text.loc[0,'text']
 data_with_referenced_text.loc[0,'referenced_text']

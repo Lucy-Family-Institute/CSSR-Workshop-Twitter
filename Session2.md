@@ -2,10 +2,16 @@
 
 ## Preparation
 > By now you should be able to pull data through Twitter API
+> The API send the data that includes 4 sections:
+>    - **data**
+>    - **includes**: has two sub-sections: referenced_tweets, referenced_users
+>    - **error**
+>    - **meta**
 >
-> The data should be consisted of 4 files:
+> The data should be consisted of 4 or 5 files:
 >    - **raw_data**: pulled tweets based on the request
 >    - **raw_reference_tweets**: contains tweets that have been referenced by the tweets in the **raw_data**
+>    - **raw_reference_users**(optional): user information associated with the **raw_reference_tweets**
 >    - **raw_errors**: error messages when pulling tweets
 >    - **raw_meta**: meta data generated when pulling tweets
 
@@ -35,10 +41,10 @@
 >
 > Further checking by indexing
 >    - ```raw_data.loc[0,"context_annotations"]```
->    - loc-indexing can used with conditions, column name, row numbers
+>    - loc-indexing can be used with conditions, column name, row numbers
 >    - ```raw_data.iloc[0,1]```
 >    - iloc-indexing is only used for both row-number and column-number indexing
->    - Notice that one tweet can have multiple annotations. It is a better practice to parse the column to a separate dataframe
+>    - Notice that one tweet can have multiple annotations. It is a better practice to parse the column ```context_annotations``` to a separate dataframe
 
 ## Parse
 > **When parsing data, or any data wrangling, keep in mind what the data type is, and which type to convert to.**
@@ -78,3 +84,7 @@
 >    - The timezone is set at the zone of UTC
 >    - Use ```pd.to_datetime()``` to convert the string to datetime format first
 >    - Then the ```datetime.dt.tz_convert('US/Eastern')``` can convert the time to US ET, the conversion is DST sensitive
+
+### End
+
+  ####  [Submit questions and issues here](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/issues) ####
