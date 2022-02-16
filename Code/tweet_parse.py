@@ -206,3 +206,4 @@ data_with_referenced_text.to_csv("./Data/cleaned_data.csv",index=False,sep='\t')
 #### Filter data by conditions
 data_with_referenced_text
 data_with_referenced_text.loc[data_with_referenced_text.like_count>50]
+data_with_referenced_text.sort_values(by='like_count',ascending=False)[['id','all_text','retweet_count','reply_count','like_count','quote_count']]

@@ -23,6 +23,20 @@
 > 5. Merge **raw_data** & **raw_reference_data**
 > 6. Filter data by condition
 
+## Context Annotations and Entities
+> - Tweet context annotations offer a way to understand contextual information about the Tweet itself. Though 100% of Tweets are reviewed, due to the contents of Tweet text, only a portion are annotated.
+>
+> - The context annotations is derived from the analysis of a Tweet’s text and will include a domain and entity pairing which can be used to **discover Tweets on topics** that may have been previously difficult to surface. At present, there is a list of 50+ domains to categorize Tweets.
+>
+>
+> - Entity annotations: Entities are comprised of below types. Entities are delivered as part of the entity payload section. They are programmatically assigned based on what is explicitly mentioned in the Tweet text.
+>     - Person - Barack Obama, Daniel, or George W. Bush
+>     - Place - Detroit, Cali, or "San Francisco, California"
+>     - Product - Mountain Dew, Mozilla Firefox
+>     - Organization - Chicago White Sox, IBM
+>     - Other - Diabetes, Super Bowl 50
+> - [More detail](https://developer.twitter.com/en/docs/twitter-api/annotations/overview)
+
 ## Explore
 > Read csv file with ```pd.read_csv```
 >    - ```dtype=object```, so the long id number is kept in full
@@ -48,6 +62,8 @@
 
 ## Parse
 > **When parsing data, or any data wrangling, keep in mind what the data type is, and which type to convert to.**
+>
+> **In the cleaning task for tweet data, pay attention to whether it's ```str``` or ```dict``` or ```list```or ```int```.**
 > #### Understanding **JSON** Data ####
 >    - A common use of JSON is to exchange data to/from a web server.
 >    - When receiving data from a web server, the data is always a string.
