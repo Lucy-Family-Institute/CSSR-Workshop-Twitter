@@ -117,6 +117,21 @@ cashtag_data.to_csv("./Data/cashtags_data.csv",index=False,sep='\t')
 
 urls_data.describe(include='all').T
 
+#### parse the raw_reference_tweets
+
+raw_reference_tweets.loc[raw_reference_tweets.context_annotations.isna()]
+raw_reference_tweets_subset = raw_reference_tweets.dropna(subset=['context_annotations'])
+
+referencd_context_list = context_flatten_vct(raw_reference_tweets_subset.id, raw_reference_tweets_subset.context_annotations)
+referencd_context_data = pd.concat(context_list,ignore_index=True)
+
+raw_reference_tweets_subset = raw_reference_tweets.dropna(subset=['entities'])
+referencd_annotations_list,referencd_urls_list,referencd_mention_list,referencd_hashtag_list,referencd_cashtag_list = entities_flatten_vct(raw_reference_tweets_subset.id, raw_reference_tweets_subset.entities)
+referencd_annotations_data = pd.concat(referencd_annotations_list,ignore_index=True)
+referencd_urls_data = pd.concat(referencd_urls_list,ignore_index=True)
+referencd_mention_data = pd.concat(referencd_mention_list,ignore_index=True)
+referencd_hashtag_data = pd.concat(referencd_hashtag_list,ignore_index=True)
+referencd_cashtag_data = pd.concat(referencd_cashtag_list,ignore_index=True)
 
 #### For those prefer a python-style programmers, bleow is an alternative to parse in a 'pythonic' way
 
