@@ -72,13 +72,13 @@
 >
 ## Wrap Up
 > Project Breakdown
->    - Data Collection
->    - Data Clean and Preparation
->    - Data Analysis and Modeling
+>    - Session1: Data Collection
+>    - Session2: Data Clean and Preparation
+>    - Session3: Data Analysis and Modeling
 >
 
 ```mermaid
 flowchart TD
-    A[Data Collection] --> B[Data Clean and Preparation];
+    A[Data Collection with Twitter API] --> B[Data Clean and Preparation];
     B --> C[Data Analysis and Modeling];
 ```
