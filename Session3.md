@@ -76,8 +76,9 @@
 >    - Data Clean and Preparation
 >    - Data Analysis and Modeling
 >
+
 ```mermaid
 flowchart TD
-    A[Data Collection] --> B(Data Clean and Preparation)
-    B --> Data Analysis and Modeling
+    A[Data Collection] --> B(Data Clean and Preparation);
+    B --> Data Analysis and Modeling;
 ```
