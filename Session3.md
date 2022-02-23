@@ -82,3 +82,7 @@ flowchart TD
     A[Data Collection with Twitter API] --> B[Data Clean and Preparation];
     B --> C[Data Analysis and Modeling];
 ```
+
+### End
+
+  ####  [Submit questions and issues here](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/issues) ####
