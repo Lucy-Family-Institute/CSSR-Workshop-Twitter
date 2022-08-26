@@ -9,8 +9,9 @@
 >    - mentions_data.csv
 
 ## Plan for Today
-> 1. Named Entity Recognition and Descriptive analysis
+> 1. Named Entity Recognition and Descriptive Analysis
 > 2. Sentiment analysis
+> 3. Visualization
 
 ## Named Entity Recognition(NER)
 > **What is NER?**
@@ -38,8 +39,8 @@
 
 ## Descriptive Analysis
 > **What we can extract from the context annotations and entities data?**
-> - ```context_data``` can tell which domain(s) the associated tweet is in. Such as _Politics_ or _Sports_.
-> - ```entities``` can tell what entities appear in the tweet(s)
+> - data set ```context_data``` can tell which domain(s) the associated tweet is in. Such as _Politics_ or _Sports_.
+> - data set ```entities``` can tell what entities appear in the tweet(s)
 > - Use ```value_counts``` to get those frequently mentioned entities
 > - Join multiple entities by ```tweet_id```, to piece together what entities each tweet has
 > - Join the hashtags or mentions for each tweet
@@ -55,14 +56,14 @@
 >         - nltk-SentimentIntensityAnalyzer
 >         - TextBlob
 >    - [VADER Compound Score](https://github.com/cjhutto/vaderSentiment#about-the-scoring) range: [-1~1]
->    -[TextBlob Score](https://textblob.readthedocs.io/en/dev/quickstart.html#sentiment-analysis) range: polarity[-1.0,1.0], subjectivity[0.0,1.0]
+>    - [TextBlob Score](https://textblob.readthedocs.io/en/dev/quickstart.html#sentiment-analysis) range: polarity[-1.0,1.0], subjectivity[0.0,1.0]
 >
 > **Pretrained Neural Network**
 >    - The model is trained with real data.
 >         - flair
 >
 > **Commercialized Model**
->    - [Openapi](https://beta.openai.com/examples/default-adv-tweet-classifier)
+>    - [Openai](https://beta.openai.com/examples/default-adv-tweet-classifier)
 >
 > **Train the Model in Specific Domain**
 >    - [BERT](https://github.com/baotramduong/Twitter-Sentiment-Analysis-with-Deep-Learning-using-BERT/blob/main/Notebook.ipynb)

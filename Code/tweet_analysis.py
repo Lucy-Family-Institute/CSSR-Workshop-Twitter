@@ -11,6 +11,7 @@ import nltk
 
 
 #### Load the data ####
+cleaned_data = pd.read_csv("./Data/cleaned_data.csv",dtype="object",sep='\t')
 context_data = pd.read_csv("./Data/context_data.csv",dtype="object",sep='\t')
 annotations_data = pd.read_csv("./Data/annotations_data.csv",dtype="object",sep='\t')
 urls_data = pd.read_csv("./Data/urls_data.csv",dtype="object",sep='\t')
@@ -47,7 +48,11 @@ temp[0:30]
 ##### hashtag associate with each tweet
 hashtag_data.tag.value_counts().reset_index().rename(columns={"index":"hashtag","username":"counts"})
 temp = hashtag_data.tag.value_counts()
-temp[0:30]
+data_plot = temp[0:30].reset_index().rename(columns={'index':'hashtag','tag':'counts'})
+data_plot.head()
+
+import matplotlib.pyplot as plt
+plt.bar(data_plot['hashtag'],data_plot['counts'])
 
 
 #### Sentiment Analysis
@@ -95,6 +100,7 @@ for element in cleaned_data.text_to_analyze:
     result.append(sentence.labels)
 sentiment_result = pd.DataFrame(result)[0].astype(str).str.split(" ",expand=True).rename(columns={0:'label',1:'confidence'})
 sentiment_result['confidence'] = sentiment_result['confidence'].str.replace(r'\(|\)',"",regex=True).astype(float)
+sentiment_result
 sentiment_result.describe()
 
 
@@ -114,20 +120,21 @@ features[1]
 
 #### openapi
 
-with open("./Code/twitter_credential_true.yaml", 'r') as stream:
-    OPENAI_API_KEY = yaml.safe_load(stream)['openapi_api-keys']
+# with open("./Code/twitter_credential_true.yaml", 'r') as stream:
+    # OPENAI_API_KEY = yaml.safe_load(stream)['openapi_api-keys']
+OPENAI_API_KEY=""
 openai.api_key = os.getenv(OPENAI_API_KEY)
 
 #### Use openapi to analytize the top-5 liked tweets
 cleaned_data = pd.read_csv("./Data/cleaned_data.csv",dtype="object",sep='\t')
 cleaned_data[['retweet_count','reply_count','like_count','quote_count']] = cleaned_data[['retweet_count','reply_count','like_count','quote_count']].astype(int)
-text_subset = cleaned_data.loc[cleaned_data.like_count>30].sort_values('like_count',ascending=False)['text']
+text_subset = cleaned_data.loc[cleaned_data.like_count>30].sort_values('like_count',ascending=False)[['text','like_count']]
+text_subset = text_subset['text']
 text_to_analyze = text_subset.str.replace(r'http\S+', '',regex=True).replace(r'@\w+','',regex=True).replace(r'\n','',regex=True)
 text_to_analyze = text_to_analyze.to_frame().assign(order=range(1,len(text_to_analyze)+1,1)).applymap(str)
 text_to_analyze = text_to_analyze.assign(prompt = text_to_analyze.order+". \\"+text_to_analyze.text)
 
 prompt = 'Classify the sentiment in these tweets:\n\n' +text_to_analyze.loc[:,'prompt'].iloc[0:5].str.cat(sep='\n')
-prompt
 
 
 openai.api_key = OPENAI_API_KEY

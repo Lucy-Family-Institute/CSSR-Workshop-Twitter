@@ -2,6 +2,7 @@
 Author: Yang Xu(yxu6@nd.edu)
 Purpose: Workshop for twitter data pulling, session 2.
          The code includes how to read saved tweets data, parsing, merging.
+         The final export would be a clean dataframe, with each column
 """
 
 # Loading Packages

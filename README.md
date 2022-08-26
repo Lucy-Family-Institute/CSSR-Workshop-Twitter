@@ -5,7 +5,7 @@ Author: Yang Xu(yxu6@nd.edu)
 
 The twitter developer account is a must-have for this workshop. To apply for a developer account, you need to have a regular twitter account. It is assumed you already have one. You will need to receive approval of a developer account before any proceedings to work on codes and twitter data analysis.
 
-Please refer to [Developer_Account](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/blob/master/Developer_Account.md) for the info of application. It is **strongly recommended** to apply as soon as you sign up the workshop. The application can take days or weeks to be approved, and twitter might require further explanation after reviewing the initial application.
+Please refer to [Developer_Account](https://github.com/Lucy-Family-Institute/CSSR-Workshop-Twitter/blob/master/Developer_Account.md) for the info of application. It is **strongly recommended** to apply as soon as you sign up the workshop. The application can take days or weeks to be approved, and twitter might require further explanation after initial review.
 
 ## Overview
 
@@ -13,16 +13,16 @@ This is the introduction of the Workshop offered by Lucy Family Institute-CSSR.
 
 Twitter is a social media where people share news, attitudes and immediate reactions to social events. Twitter offers an API to researchers to collect data. The API allows users to define their own conditions for data retrieval, such as keywords, date range, is retweet or not, reply or mention a certain user etc.
 
-The workshop introduces a series of hands-on projects on how to collect data from twitter, parse tweets and apply basic NLP(Natural Language Processing) analysis.
+The workshop introduces a series of hands-on projects on how to collect data from twitter, parse tweets and apply basic NLP (Natural Language Processing) analysis.
 
 Participants will learn:
-1. How to set up code and pull data through twitter API, save data locally. (Feb.9)
-2. Wrangle and clean the raw data. (Feb.16)
-3. Apply NLP(Natural Language Processing) model, such as sentiment analysis. (Feb.23)
+1. How to set up code and pull data through twitter API, save data locally. (Session 1)
+2. Wrangle and clean the raw data. (Session 2)
+3. Apply NLP (Natural Language Processing) model, such as sentiment analysis. (Session 3)
 
 ## Prior Knowledge
 
-The workshop assumes the working knowledge of Python. There are links to some useful Python basics below.
+The workshop assumes the working knowledge of Python. There are links to some useful Python basics below. The workshop will not go through Python introduction, such as: data types, for loop, and condition.
 
 ## Software Details
 
@@ -40,7 +40,7 @@ Once you have the twitter developer account and Python IDE set up on your comput
 
 ## Workshop Plan and Dates
 
-The workshop is planned to spread out over three weeks with 1.5 hours sessions each week. Each workshop will cover a brief introduction, go through a few live demos. The instructor will answer questions and help with the bugs.
+The workshop is planned to spread out over three weeks with 1.5 hours sessions each week. Each workshop will cover a brief introduction, go through a few live demos. The instructor will answer questions and help with the bugs during live-coding.
 
 ### Course Dates:
 
@@ -57,7 +57,7 @@ Examples of pulling data from twitter:
 3. Tweets contain a certain hashtag or multiple hashtags
 4. Search tweets by a set of conditions(time-permitting)
 
-For those who are interested in the advanced techniques, there is code to show how to pull data and save it locally at the same time, this is especially useful when the size of the pulled data is huge.
+For those who are interested in the advanced techniques, there is code to show how to pull data and save it locally at the same time, this is especially useful when the size of the target data is huge.
 
 ### Session 2: Parse twitter data
 
@@ -65,7 +65,7 @@ The raw data that the twitter API returned shall be converted to json format fir
 
 Here is an [example](https://www.w3schools.com/python/python_datatypes.asp) to illustrate different data types in python. The data types we will need to deal with in this workshop are: str, int, float, list, tuple, dict, set and bool.
 
-JSON data is a data type widely used for data exchange. Please read the [Intro](https://www.w3schools.com/js/js_json_intro.asp) and [JSON Parse](https://www.w3schools.com/js/js_json_intro.asp). This will help us perceive the twitter data parsing.
+JSON data is a data type widely used for data exchange on internet. Please read the [Intro](https://www.w3schools.com/js/js_json_intro.asp) and [JSON Parse](https://www.w3schools.com/js/js_json_intro.asp). This will help us perceive the twitter data parsing.
 
 Besides, we will also use two basic control flows in programming. It is helpful if you know the control flows in programming, but if not, [here](https://docs.python.org/3/tutorial/controlflow.html) is a good intro on that. We will mostly use condition(*if...else...*) and loop(*for loop*) control.
 

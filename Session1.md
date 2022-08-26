@@ -18,12 +18,12 @@
 >  The data pulling through Twitter API follows HTTP protocol. It is very useful for debugging when the API returns error message.
 > #### Frequent HTTP Status Code:
 > ![404](source/google404.webp)
-> 1. Successful responses: 200(Successful)
-> 2. Client error response: 401(Unauthorized), 403(Forbidden), 404(Not Found)
+> 1. Successful responses: 200 (Successful)
+> 2. Client-end error response: 401 (Unauthorized), 403 (Forbidden), 404 (Not Found)
 >     - Response Status Code starting with 4 means the client end has error(s).
 >     - Check the request detail
-> 3. Server error response: 500(Internal Server Error), 503(Service Unavailable)
->     - Response Status Code starting with 5 means the server end(Twitter Server) has error(s).
+> 3. Server-end error response: 500 (Internal Server Error), 503 (Service Unavailable)
+>     - Response Status Code starting with 5 means the server end (Twitter Server) has error(s).
 >     - Nothing you can do about it, wait and retry
 
 ## Tweet Cap and Rate Limit
@@ -64,7 +64,7 @@
   > 4. Expansions
   >   * To request the reference tweets data. Referenced tweets are quoted tweets or the tweets that are replied to.
   >   * An example:
-  >   
+  >
   > [Example: Quoted Tweets](https://twitter.com/elonmusk/status/1489340604215615492)
   >
   > Available Expansions:
