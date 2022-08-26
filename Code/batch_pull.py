@@ -38,7 +38,8 @@ if 'tweets' in search_tweets.includes:
     pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'/Data/RT_com_referenced_tweets.csv',sep='\t', mode='w',index=False)
 pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'/Data/RT_com_errors.csv',sep='\t', mode='w',index=False)
 pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'/Data/RT_com_meta.csv',sep='\t', mode='w',index=False)
-next_token = search_tweets.meta['next_token']
+if 'next_token' in search_tweets.meta:
+    next_token = search_tweets.meta['next_token']
 n = 100
 while next_token is not None:
     search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,next_token=next_token,tweet_fields=target_tweet_fields,max_results=100,start_time=start_time, end_time=end_time)
@@ -49,7 +50,9 @@ while next_token is not None:
         pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'/Data/RT_com_referenced_tweets.csv',sep='\t', mode='a',index=False)
     pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'/Data/RT_com_errors.csv',sep='\t', mode='a',index=False)
     pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'/Data/RT_com_meta.csv',sep='\t', mode='a',index=False)
-    next_token = search_tweets.meta['next_token']
+    if 'next_token' in search_tweets.meta:
+        next_token = search_tweets.meta['next_token']
+    else: next_token = None
     time.sleep(1)
     n += 100
     print("RT_com tweets pulled: %s" %n)
@@ -77,7 +80,8 @@ if 'tweets' in search_tweets.includes:
     pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'/Data/KyivPost_referenced_tweets.csv',sep='\t', mode='w',index=False)
 pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'/Data/KyivPost_errors.csv',sep='\t', mode='w',index=False)
 pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'/Data/KyivPost_meta.csv',sep='\t', mode='w',index=False)
-next_token = search_tweets.meta['next_token']
+if 'next_token' in search_tweets.meta:
+    next_token = search_tweets.meta['next_token']
 n = 100
 while next_token is not None:
     search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,next_token=next_token,tweet_fields=target_tweet_fields,max_results=100,start_time=start_time, end_time=end_time)
@@ -88,7 +92,9 @@ while next_token is not None:
         pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'/Data/KyivPost_referenced_tweets.csv',sep='\t', mode='a',index=False)
     pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'/Data/KyivPost_errors.csv',sep='\t', mode='a',index=False)
     pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'/Data/KyivPost_meta.csv',sep='\t', mode='a',index=False)
-    next_token = search_tweets.meta['next_token']
+    if 'next_token' in search_tweets.meta:
+        next_token = search_tweets.meta['next_token']
+    else: next_token = None
     time.sleep(1)
     n += 100
     print("KyivPost tweets pulled: %s" %n)
