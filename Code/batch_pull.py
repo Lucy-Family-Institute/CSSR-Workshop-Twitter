@@ -46,7 +46,7 @@ while next_token is not None:
     if 'user' in search_tweets.includes:
         pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'./Data/RT_com_referenced_user.csv',sep='\t',mode='a',index=False)
     if 'tweets' in search_tweets.includes:
-    pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'./Data/RT_com_referenced_tweets.csv',sep='\t', mode='a',index=False)
+        pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'./Data/RT_com_referenced_tweets.csv',sep='\t', mode='a',index=False)
     pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'./Data/RT_com_errors.csv',sep='\t', mode='a',index=False)
     pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'./Data/RT_com_meta.csv',sep='\t', mode='a',index=False)
     next_token = search_tweets.meta['next_token']
