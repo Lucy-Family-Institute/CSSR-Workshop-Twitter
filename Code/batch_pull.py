@@ -31,13 +31,13 @@ search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,t
 
 data_columns = ['author_id', 'context_annotations', 'conversation_id', 'created_at','entities', 'id', 'in_reply_to_user_id', 'public_metrics','referenced_tweets', 'text', 'Copyright']
 error_columns = ['parameter', 'resource_id', 'value', 'detail', 'title', 'resource_type','type', 'section']
-pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv(ROOT_DIR+'./Data/RT_com_data.csv',sep='\t', mode='a',index=False)
+pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv(ROOT_DIR+'./Data/RT_com_data.csv',sep='\t', mode='w',index=False)
 if 'user' in search_tweets.includes:
-    pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'./Data/RT_com_referenced_user.csv',sep='\t', mode='a',index=False)
+    pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'./Data/RT_com_referenced_user.csv',sep='\t', mode='w',index=False)
 if 'tweets' in search_tweets.includes:
-    pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'./Data/RT_com_referenced_tweets.csv',sep='\t', mode='a',index=False)
-pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'./Data/RT_com_errors.csv',sep='\t', mode='a',index=False)
-pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'./Data/RT_com_meta.csv',sep='\t', mode='a',index=False)
+    pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'./Data/RT_com_referenced_tweets.csv',sep='\t', mode='w',index=False)
+pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'./Data/RT_com_errors.csv',sep='\t', mode='w',index=False)
+pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'./Data/RT_com_meta.csv',sep='\t', mode='w',index=False)
 next_token = search_tweets.meta['next_token']
 n = 100
 while next_token is not None:
@@ -70,13 +70,13 @@ search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,t
 
 data_columns = ['author_id', 'context_annotations', 'conversation_id', 'created_at','entities', 'id', 'in_reply_to_user_id', 'public_metrics','referenced_tweets', 'text', 'Copyright']
 error_columns = ['parameter', 'resource_id', 'value', 'detail', 'title', 'resource_type','type', 'section']
-pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv(ROOT_DIR+'./Data/KyivPost_data.csv',sep='\t', mode='a',index=False)
+pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv(ROOT_DIR+'./Data/KyivPost_data.csv',sep='\t', mode='w',index=False)
 if 'user' in search_tweets.includes:
-    pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'./Data/KyivPost_referenced_user.csv',sep='\t', mode='a',index=False)
+    pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'./Data/KyivPost_referenced_user.csv',sep='\t', mode='w',index=False)
 if 'tweets' in search_tweets.includes:
-    pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'./Data/KyivPost_referenced_tweets.csv',sep='\t', mode='a',index=False)
-pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'./Data/KyivPost_errors.csv',sep='\t', mode='a',index=False)
-pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'./Data/KyivPost_meta.csv',sep='\t', mode='a',index=False)
+    pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'./Data/KyivPost_referenced_tweets.csv',sep='\t', mode='w',index=False)
+pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'./Data/KyivPost_errors.csv',sep='\t', mode='w',index=False)
+pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'./Data/KyivPost_meta.csv',sep='\t', mode='w',index=False)
 next_token = search_tweets.meta['next_token']
 n = 100
 while next_token is not None:
