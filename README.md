@@ -1,4 +1,4 @@
-# CSSR-Workshop-Twitter
+# Twitter Data and Social Science Study
 Author: Yang Xu(yxu6@nd.edu)
 
 ## IMPORTANT INFORMATION
@@ -18,11 +18,11 @@ The workshop introduces a series of hands-on projects on how to collect data fro
 Participants will learn:
 1. How to set up code and pull data through twitter API, save data locally. (Session 1)
 2. Wrangle and clean the raw data. (Session 2)
-3. Apply NLP (Natural Language Processing) model, such as sentiment analysis. (Session 3)
+3. Apply NLP (Natural Language Processing) model for text and sentiment analysis. (Session 3)
 
 ## Prior Knowledge
 
-The workshop assumes the working knowledge of Python. There are links to some useful Python basics below. The workshop will not go through Python introduction, such as: data types, for loop, and condition.
+The workshop assumes the working knowledge of Python. There are links to some useful Python basics below. The workshop will **NOT** go through Python introduction, such as: data types, for loop, and condition.
 
 ## Software Details
 
@@ -44,9 +44,9 @@ The workshop is planned to spread out over three weeks with 1.5 hours sessions e
 
 ### Course Dates:
 
-1. Session 1: Wednesday, 3:30-5pm Feb.9 CDS Classroom 246
-2. Session 2: Wednesday, 3:30-5pm Feb.16 CDS Classroom 125
-3. Session 3: Wednesday, 3:30-5pm Feb.23 CDS Classroom 246
+1. Session 1: Tuesday, 10:30-12pm Sept.20 CDS Classroom 246
+2. Session 2: Tuesday, 10:30-12pm Sept.27 CDS Classroom 246
+3. Session 3: Tuesday, 10:30-12pm Oct.4 CDS Classroom 246
 
 ### Session 1: Set up and twitter data pull
 
@@ -55,7 +55,7 @@ Examples of pulling data from twitter:
 1. Timeline from certain accounts
 2. The tweets a certain user liked
 3. Tweets contain a certain hashtag or multiple hashtags
-4. Search tweets by a set of conditions(time-permitting)
+4. Search tweets by a set of conditions (time-permitting)
 
 For those who are interested in the advanced techniques, there is code to show how to pull data and save it locally at the same time, this is especially useful when the size of the target data is huge.
 
@@ -71,9 +71,9 @@ Besides, we will also use two basic control flows in programming. It is helpful 
 
 ### Session 3: NLP Analysis
 
-Tweets often come with the real-time reactions to social events. Thus, the tweets we obtained carries many information. One of most common cases is sentiment analysis, which will rate each tweet whether it's positive/native to a certain topic.
+Tweets often come with the real-time reactions to social events. Thus, the tweets we obtained carries many information. Some of most common cases are like text analysis for topics, sentiment analysis that will rate each tweet whether it's positive/native to a certain topic.
 
-The workshop will introduce a few NLP models for such task. Besides that, it is often useful to wrangle the data before analysis. E.g. single out links from the text body. The package **pandas** will be very powerful for data cleaning.
+The workshop will introduce a few NLP models for such task. Besides that, Twitter has its own AI engine to analyze tweets, the useful . E.g. single out links from the text body. The package **pandas** will be very powerful for data cleaning.
 
 ## Course Attendance and Delivery
 
