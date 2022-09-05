@@ -1,10 +1,3 @@
-"""
-Author: Yang Xu(yxu6@nd.edu)
-Purpose: Workshop for twitter data pulling, session 2.
-         The code includes how to read saved tweets data, parsing, merging.
-         The final export would be a clean dataframe, with each column
-"""
-
 # Loading Packages
 import pandas as pd
 import os,json
@@ -17,36 +10,51 @@ os.getcwd()
 # os.chdir()
 
 ##### read the saved data
-raw_data = pd.read_csv('./Data/Breyer_data_2022_02.csv',sep='\t',dtype=object).dropna(subset=['id'])
-raw_reference_tweets = pd.read_csv('./Data/Breyer_reference_tweets_2022_02.csv',sep='\t',dtype=object).dropna(subset=['id'])
-raw_reference_users = pd.read_csv('./Data/Breyer_reference_users_2022_02.csv',sep='\t',dtype=object).dropna(subset=['id'])
-raw_error = pd.read_csv('./Data/Breyer_errors_2022_02.csv',sep='\t',dtype=object)
-raw_meta = pd.read_csv('./Data/Breyer_meta_2022_02.csv',sep='\t',dtype=object)
+raw_kyiv_data = pd.read_csv('./Data/KyivPost_data.csv',sep='\t',dtype=object).dropna(subset=['id']).drop_duplicates(keep=False)
+raw_kyiv_reference_tweets = pd.read_csv('./Data/KyivPost_referenced_tweets.csv',sep='\t',dtype=object).dropna(subset=['id']).drop_duplicates(keep=False)
+raw_kyiv_error = pd.read_csv('./Data/KyivPost_errors.csv',sep='\t',dtype=object).drop_duplicates(keep=False)
+raw_kyiv_meta = pd.read_csv('./Data/KyivPost_meta.csv',sep='\t',dtype=object).drop_duplicates(keep=False)
+
+raw_rt_com_data = pd.read_csv('./Data/RT_com_data.csv',sep='\t',dtype=object).dropna(subset=['id']).drop_duplicates(keep=False)
+raw_rt_com_reference_tweets = pd.read_csv('./Data/RT_com_referenced_tweets.csv',sep='\t',on_bad_lines='skip',dtype=object).dropna(subset=['id']).drop_duplicates(keep=False)
+raw_rt_com_error = pd.read_csv('./Data/RT_com_errors.csv',sep='\t',dtype=object).drop_duplicates(keep=False)
+raw_rt_com_meta = pd.read_csv('./Data/RT_com_meta.csv',sep='\t',dtype=object).drop_duplicates(keep=False)
 
 ##### summarize the data
-raw_data.describe().T
-raw_data.dtypes
-raw_reference_tweets.describe().T
-raw_reference_users.describe().T
-raw_error.describe().T
-raw_meta.describe().T
+raw_kyiv_data.describe().T
+raw_kyiv_data.dtypes
+raw_kyiv_reference_tweets.describe().T
+raw_kyiv_error.describe().T
+raw_kyiv_meta.describe().T
+
+raw_rt_com_data.describe().T
+raw_rt_com_data.dtypes
+raw_rt_com_reference_tweets.describe().T
+raw_rt_com_error.describe().T
+raw_rt_com_meta.describe().T
 
 ##### glimpse the data
-raw_data.head()
-raw_reference_tweets.head()
-raw_reference_users.head()
-raw_error.head()
-raw_meta.head()
+raw_kyiv_data.head()
+raw_kyiv_reference_tweets.head()
+# raw_kyiv_reference_users.head()
+raw_kyiv_error.head()
+raw_kyiv_meta.head()
+
+raw_rt_com_data.head()
+raw_rt_com_reference_tweets.head()
+# raw_rt_com_reference_users.head()
+raw_rt_com_error.head()
+raw_rt_com_meta.head()
 
 #### indexing the data
-temp = raw_data.loc[0,'context_annotations']
+temp = raw_kyiv_data.loc[0,'context_annotations']
 type(temp)
 #### convert str to json
 temp_json = ast.literal_eval(temp)
 type(temp_json)
 pd.json_normalize(temp_json,sep="_")
 
-temp = raw_data.loc[0,'entities']
+temp = raw_kyiv_data.loc[0,'entities']
 type(temp)
 temp_json = ast.literal_eval(temp)
 type(temp_json)

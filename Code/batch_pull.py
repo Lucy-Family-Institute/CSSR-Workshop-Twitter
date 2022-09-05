@@ -4,6 +4,7 @@ import os, json
 import numpy as np
 import time
 import yaml
+import pyarrow.orc as orc
 # from datetime import timezone
 os.getcwd()
 # ROOT_DIR = '/Users/yxu6/Alego/CSSR-Workshop-Twitter/'
@@ -29,35 +30,65 @@ target_tweet_fields = ['author_id','context_annotations','conversation_id','crea
 expansions = ['referenced_tweets.id','in_reply_to_user_id']
 search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,tweet_fields=target_tweet_fields,max_results=100,start_time=start_time, end_time=end_time)
 
-data_columns = ['author_id', 'context_annotations', 'conversation_id', 'created_at','entities', 'id', 'in_reply_to_user_id', 'public_metrics','referenced_tweets', 'text', 'Copyright']
-error_columns = ['parameter', 'resource_id', 'value', 'detail', 'title', 'resource_type','type', 'section']
-pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv(ROOT_DIR+'/Data/RT_com_data.csv',sep='\t', mode='w',index=False)
-if 'user' in search_tweets.includes:
-    pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'/Data/RT_com_referenced_user.csv',sep='\t', mode='w',index=False)
-if 'tweets' in search_tweets.includes:
-    pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'/Data/RT_com_referenced_tweets.csv',sep='\t', mode='w',index=False)
-pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'/Data/RT_com_errors.csv',sep='\t', mode='w',index=False)
-pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'/Data/RT_com_meta.csv',sep='\t', mode='w',index=False)
+# search_tweets_dict = search_tweets._asdict()
+dir(search_tweets)
+
+with open(ROOT_DIR+'/Data/RT_com_data.json', 'a', encoding='utf-8') as f:
+    for tweet in search_tweets.data:
+        f.write(json.dumps(tweet.data))
+        f.write('\n')
+
+for key, value in search_tweets.includes.items():
+    print(key)
+    with open(ROOT_DIR+'/Data/RT_com_includes_'+key+'.json', 'a', encoding='utf-8') as f:
+        for item in value:
+            f.write(json.dumps(item.data))
+            f.write('\n')
+
+with open(ROOT_DIR+'/Data/RT_com_meta.json', 'a', encoding='utf-8') as f:
+    f.write(json.dumps(search_tweets.meta))
+    f.write('\n')
+
+with open(ROOT_DIR+'/Data/RT_com_errors.json', 'a', encoding='utf-8') as f:
+    f.write(json.dumps(search_tweets.errors))
+    f.write('\n')
+
+
 if 'next_token' in search_tweets.meta:
     next_token = search_tweets.meta['next_token']
 n = 100
 while next_token is not None:
     search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,next_token=next_token,tweet_fields=target_tweet_fields,max_results=100,start_time=start_time, end_time=end_time)
-    pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv(ROOT_DIR+'/Data/RT_com_data.csv',sep='\t', mode='a',index=False)
-    if 'user' in search_tweets.includes:
-        pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'/Data/RT_com_referenced_user.csv',sep='\t',mode='a',index=False)
-    if 'tweets' in search_tweets.includes:
-        pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'/Data/RT_com_referenced_tweets.csv',sep='\t', mode='a',index=False)
-    pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'/Data/RT_com_errors.csv',sep='\t', mode='a',index=False)
-    pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'/Data/RT_com_meta.csv',sep='\t', mode='a',index=False)
+
+    with open(ROOT_DIR+'/Data/RT_com_data.json', 'a', encoding='utf-8') as f:
+        for tweet in search_tweets.data:
+            f.write(json.dumps(tweet.data))
+            f.write('\n')
+
+    for key, value in search_tweets.includes.items():
+        print(key)
+        with open(ROOT_DIR+'/Data/RT_com_includes_'+key+'.json', 'a', encoding='utf-8') as f:
+            for item in value:
+                f.write(json.dumps(item.data))
+                f.write('\n')
+
+    with open(ROOT_DIR+'/Data/RT_com_meta.json', 'a', encoding='utf-8') as f:
+        f.write(json.dumps(search_tweets.meta))
+        f.write('\n')
+
+    with open(ROOT_DIR+'/Data/RT_com_errors.json', 'a', encoding='utf-8') as f:
+        f.write(json.dumps(search_tweets.errors))
+        f.write('\n')
+
     if 'next_token' in search_tweets.meta:
         next_token = search_tweets.meta['next_token']
     else: next_token = None
     time.sleep(1)
     n += 100
     print("RT_com tweets pulled: %s" %n)
-    # if (n==2500):
-        # break
+
+data_columns = ['author_id', 'context_annotations', 'conversation_id', 'created_at','entities', 'id', 'in_reply_to_user_id', 'public_metrics','referenced_tweets', 'text', 'Copyright']
+error_columns = ['parameter', 'resource_id', 'value', 'detail', 'title', 'resource_type','type', 'section']
 
 
 #%% Kyiv Post
@@ -71,27 +102,56 @@ target_tweet_fields = ['author_id','context_annotations','conversation_id','crea
 expansions = ['referenced_tweets.id','in_reply_to_user_id']
 search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,tweet_fields=target_tweet_fields,max_results=100,start_time=start_time, end_time=end_time)
 
-data_columns = ['author_id', 'context_annotations', 'conversation_id', 'created_at','entities', 'id', 'in_reply_to_user_id', 'public_metrics','referenced_tweets', 'text', 'Copyright']
-error_columns = ['parameter', 'resource_id', 'value', 'detail', 'title', 'resource_type','type', 'section']
-pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv(ROOT_DIR+'/Data/KyivPost_data.csv',sep='\t', mode='w',index=False)
-if 'user' in search_tweets.includes:
-    pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'/Data/KyivPost_referenced_user.csv',sep='\t', mode='w',index=False)
-if 'tweets' in search_tweets.includes:
-    pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'/Data/KyivPost_referenced_tweets.csv',sep='\t', mode='w',index=False)
-pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'/Data/KyivPost_errors.csv',sep='\t', mode='w',index=False)
-pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'/Data/KyivPost_meta.csv',sep='\t', mode='w',index=False)
+# search_tweets_dict = search_tweets._asdict()
+dir(search_tweets)
+
+with open(ROOT_DIR+'/Data/KyivPost_data.json', 'a', encoding='utf-8') as f:
+    for tweet in search_tweets.data:
+        f.write(json.dumps(tweet.data))
+        f.write('\n')
+
+for key, value in search_tweets.includes.items():
+    print(key)
+    with open(ROOT_DIR+'/Data/KyivPost_includes_'+key+'.json', 'a', encoding='utf-8') as f:
+        for item in value:
+            f.write(json.dumps(item.data))
+            f.write('\n')
+
+with open(ROOT_DIR+'/Data/KyivPost_meta.json', 'a', encoding='utf-8') as f:
+    f.write(json.dumps(search_tweets.meta))
+    f.write('\n')
+
+with open(ROOT_DIR+'/Data/KyivPost_errors.json', 'a', encoding='utf-8') as f:
+    f.write(json.dumps(search_tweets.errors))
+    f.write('\n')
+
+
 if 'next_token' in search_tweets.meta:
     next_token = search_tweets.meta['next_token']
 n = 100
 while next_token is not None:
     search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,next_token=next_token,tweet_fields=target_tweet_fields,max_results=100,start_time=start_time, end_time=end_time)
-    pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv(ROOT_DIR+'/Data/KyivPost_data.csv',sep='\t', mode='a',index=False)
-    if 'user' in search_tweets.includes:
-        pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'/Data/KyivPost_referenced_user.csv',sep='\t',mode='a',index=False)
-    if 'tweets' in search_tweets.includes:
-        pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'/Data/KyivPost_referenced_tweets.csv',sep='\t', mode='a',index=False)
-    pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'/Data/KyivPost_errors.csv',sep='\t', mode='a',index=False)
-    pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'/Data/KyivPost_meta.csv',sep='\t', mode='a',index=False)
+
+    with open(ROOT_DIR+'/Data/KyivPost_data.json', 'a', encoding='utf-8') as f:
+        for tweet in search_tweets.data:
+            f.write(json.dumps(tweet.data))
+            f.write('\n')
+
+    for key, value in search_tweets.includes.items():
+        print(key)
+        with open(ROOT_DIR+'/Data/KyivPost_includes_'+key+'.json', 'a', encoding='utf-8') as f:
+            for item in value:
+                f.write(json.dumps(item.data))
+                f.write('\n')
+
+    with open(ROOT_DIR+'/Data/KyivPost_meta.json', 'a', encoding='utf-8') as f:
+        f.write(json.dumps(search_tweets.meta))
+        f.write('\n')
+
+    with open(ROOT_DIR+'/Data/KyivPost_errors.json', 'a', encoding='utf-8') as f:
+        f.write(json.dumps(search_tweets.errors))
+        f.write('\n')
+
     if 'next_token' in search_tweets.meta:
         next_token = search_tweets.meta['next_token']
     else: next_token = None
