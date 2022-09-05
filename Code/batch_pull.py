@@ -28,7 +28,8 @@ end_time = '2022-08-24T23:59:59Z'
 
 target_tweet_fields = ['author_id','context_annotations','conversation_id','created_at','entities','public_metrics']
 expansions = ['referenced_tweets.id','in_reply_to_user_id']
-search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,tweet_fields=target_tweet_fields,max_results=100,start_time=start_time, end_time=end_time)
+next_token = "b26v89c19zqg8o3fpe18a5afv6sjkyzpi6sk7qsv1u4ql"
+search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,next_token=next_token,tweet_fields=target_tweet_fields,max_results=100,start_time=start_time, end_time=end_time)
 
 # search_tweets_dict = search_tweets._asdict()
 dir(search_tweets)
@@ -57,6 +58,7 @@ with open(ROOT_DIR+'/Data/RT_com_errors.json', 'a', encoding='utf-8') as f:
 if 'next_token' in search_tweets.meta:
     next_token = search_tweets.meta['next_token']
 n = 100
+
 while next_token is not None:
     search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,next_token=next_token,tweet_fields=target_tweet_fields,max_results=100,start_time=start_time, end_time=end_time)
 
