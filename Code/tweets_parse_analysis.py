@@ -10,6 +10,25 @@ os.getcwd()
 # os.chdir()
 
 ##### read the saved data
+raw_kyiv_data = pd.read_json('./Data/KyivPost_data.json',orient='records',lines=True)
+raw_kyiv_includes_tweets = pd.read_json('./Data/KyivPost_includes_tweets.json',orient='records',lines=True)
+raw_kyiv_includes_users = pd.read_json('./Data/KyivPost_includes_users.json',orient='records',lines=True)
+raw_kyiv_meta = pd.read_json('./Data/KyivPost_meta.json',orient='records',lines=True)
+
+# method1
+raw_kyiv_errors = []
+with open('./Data/KyivPost_errors.json', 'r') as r:
+    for line in r:
+        temp = json.loads(line)
+        if temp:
+            raw_kyiv_errors.append(pd.DataFrame(temp))
+            # raw_kyiv_errors.append(json.loads(line))
+raw_kyiv_errors = pd.concat(raw_kyiv_errors)
+raw_kyiv_errors = pd.read_json('./Data/KyivPost_errors.json',orient='value',lines=True)
+
+# method2
+pd.melt(raw_kyiv_errors).dropna(subset=['value']).value.apply(pd.Series)
+
 raw_kyiv_data = pd.read_csv('./Data/KyivPost_data.csv',sep='\t',dtype=object).dropna(subset=['id']).drop_duplicates(keep=False)
 raw_kyiv_reference_tweets = pd.read_csv('./Data/KyivPost_referenced_tweets.csv',sep='\t',dtype=object).dropna(subset=['id']).drop_duplicates(keep=False)
 raw_kyiv_error = pd.read_csv('./Data/KyivPost_errors.csv',sep='\t',dtype=object).drop_duplicates(keep=False)
