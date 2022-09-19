@@ -14,22 +14,23 @@ import time
 import yaml
 # from datetime import timezone
 os.getcwd()
-# ROOT_DIR = os.path.split(os.getcwd())[0]
-ROOT_DIR = '/Users/yxu6/Alego/CSSR-Workshop-Twitter/'
+ROOT_DIR = os.path.split(os.getcwd())[0]
+# or use below
+ROOT_DIR = 'path/to/where/read/or/load/files'
 # os.chdir()
 
 #%%
 ##### Load Credentials and connect to twitter API #####
 with open(ROOT_DIR+"/Code/twitter_credential_true.yaml", 'r') as stream:
     BearerToken = yaml.safe_load(stream)['BearerToken']
-
-# BearerToken = ""
+# or put token below
+BearerToken = 'copy/token/from/Developer Account Portal'
 api = tweepy.Client(bearer_token=BearerToken)
 
 #%%
 ##### get timeline of certain accounts #####
 ## Go to twitter and find the user name
-user_id = api.get_user(username='taylorswift13')
+user_id = api.get_user(username='elonmusk')
 user_timelines = api.get_users_tweets(id=user_id.data['id'],max_results=10)
 user_timelines
 
@@ -70,8 +71,9 @@ target_tweet_fields = ['author_id','context_annotations','conversation_id','crea
 expansions = ['referenced_tweets.id','in_reply_to_user_id']
 user_timelines = api.get_users_tweets(id=user_id.data['id'],expansions=expansions,tweet_fields=target_tweet_fields,max_results=100)
 pd.DataFrame(user_timelines.data)
-user_timelines.includes
+user_timelines.errors
 user_timelines.meta
+user_timelines.includes
 # user_timelines.includes.keys()
 
 pd.DataFrame(user_timelines.includes['users'],dtype='object')
@@ -83,7 +85,9 @@ user_id = api.get_user(username='taylorswift13')
 target_tweet_fields = ['author_id','context_annotations','conversation_id','created_at','entities']
 expansions = ['referenced_tweets.id','in_reply_to_user_id']
 user_liked_tweets = api.get_liked_tweets(id=user_id.data['id'],expansions=expansions,tweet_fields=target_tweet_fields,max_results=100)
+pd.DataFrame(user_liked_tweets.data,dtype='object')
 pd.DataFrame(user_liked_tweets.data,dtype='object').iloc[0,1]
+user_liked_tweets.errors
 
 ##### fetch another 100 tweets with next_token
 next_token = user_liked_tweets.meta['next_token']
@@ -151,20 +155,20 @@ data_columns = ['author_id', 'context_annotations', 'conversation_id', 'created_
        'referenced_tweets', 'text', 'Copyright']
 error_columns = ['parameter', 'resource_id', 'value', 'detail', 'title', 'resource_type',
        'type', 'section']
-pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv('./Data/Breyer_data_2022_02.csv',sep='\t', mode='a',index=False)
-pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv('./Data/Breyer_reference_users_2022_02.csv',sep='\t', mode='a',index=False)
-pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv('./Data/Breyer_reference_tweets_2022_02.csv',sep='\t', mode='a',index=False)
-pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv('./Data/Breyer_errors_2022_02.csv',sep='\t', mode='a',index=False)
-pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv('./Data/Breyer_meta_2022_02.csv',sep='\t', mode='a',index=False)
+pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv(ROOT_DIR+'/Data/Breyer_data_2022_02.csv',sep='\t', mode='a',index=False)
+pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'/Data/Breyer_reference_users_2022_02.csv',sep='\t', mode='a',index=False)
+pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'/Data/Breyer_reference_tweets_2022_02.csv',sep='\t', mode='a',index=False)
+pd.DataFrame(search_tweets.errors,dtype='object',columns=error_columns).to_csv(ROOT_DIR+'/Data/Breyer_errors_2022_02.csv',sep='\t', mode='a',index=False)
+pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'/Data/Breyer_meta_2022_02.csv',sep='\t', mode='a',index=False)
 next_token = search_tweets.meta['next_token']
 n = 100
 while next_token is not None:
     search_tweets = api.search_all_tweets(query=search_query,expansions=expansions,next_token=next_token,tweet_fields=target_tweet_fields,max_results=100,start_time=start_time, end_time=end_time)
-    pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv('./Data/Breyer_data_2022_02.csv',sep='\t',mode='a',index=False,header=False,float_format='str')
-    pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv('./Data/Breyer_reference_users_2022_02.csv',sep='\t',mode='a',index=False,header=False,float_format='str')
-    pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv('./Data/Breyer_reference_tweets_2022_02.csv',sep='\t',mode='a',index=False,header=False,float_format='str')
-    pd.DataFrame(search_tweets.errors,dtype='object').to_csv('./Data/Breyer_errors_2022_02.csv',sep='\t',mode='a',index=False,header=False,float_format='str')
-    pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv('./Data/Breyer_meta_2022_02.csv',sep='\t',mode='a',index=False,header=False,float_format='str')
+    pd.DataFrame(search_tweets.data,dtype='object',columns=data_columns).to_csv(ROOT_DIR+'/Data/Breyer_data_2022_02.csv',sep='\t',mode='a',index=False,header=False,float_format='str')
+    pd.DataFrame(search_tweets.includes['users'],dtype='object').to_csv(ROOT_DIR+'/Data/Breyer_reference_users_2022_02.csv',sep='\t',mode='a',index=False,header=False,float_format='str')
+    pd.DataFrame(search_tweets.includes['tweets'],dtype='object').to_csv(ROOT_DIR+'/Data/Breyer_reference_tweets_2022_02.csv',sep='\t',mode='a',index=False,header=False,float_format='str')
+    pd.DataFrame(search_tweets.errors,dtype='object').to_csv(ROOT_DIR+'/Data/Breyer_errors_2022_02.csv',sep='\t',mode='a',index=False,header=False,float_format='str')
+    pd.DataFrame(search_tweets.meta,index=[0],dtype='object').to_csv(ROOT_DIR+'/Data/Breyer_meta_2022_02.csv',sep='\t',mode='a',index=False,header=False,float_format='str')
     next_token = search_tweets.meta['next_token']
     time.sleep(1)
     n += 100
@@ -237,24 +241,24 @@ while next_token is not None:
 
 #%%
 ##### read the saved data from method 1
-raw_data = pd.read_csv('./Data/Breyer_data_2022_02.csv',on_bad_lines='warn',sep='\t')
-raw_reference_tweets = pd.read_csv('./Data/Breyer_reference_tweets_2022_02.csv',sep='\t')
-raw_reference_users = pd.read_csv('./Data/Breyer_reference_users_2022_02.csv',sep='\t')
+raw_data = pd.read_csv(ROOT_DIR+'/Data/Breyer_data_2022_02.csv',on_bad_lines='warn',sep='\t')
+raw_reference_tweets = pd.read_csv(ROOT_DIR+'/Data/Breyer_reference_tweets_2022_02.csv',sep='\t')
+raw_reference_users = pd.read_csv(ROOT_DIR+'/Data/Breyer_reference_users_2022_02.csv',sep='\t')
 ## if there is no error message, below could be an empty file
-raw_error = pd.read_csv('./Data/Breyer_errors_2022_02.csv',sep='\t')
-raw_meta = pd.read_csv('./Data/Breyer_meta_2022_02.csv',sep='\t')
+raw_error = pd.read_csv(ROOT_DIR+'/Data/Breyer_errors_2022_02.csv',sep='\t')
+raw_meta = pd.read_csv(ROOT_DIR+'/Data/Breyer_meta_2022_02.csv',sep='\t')
 
-##### read the saved data from method 1
-raw_data = pd.read_json('./Data/Breyer_data.json',orient='records',lines=True)
-raw_includes_tweets = pd.read_json('./Data/Breyer_includes_tweets.json',orient='records',lines=True)
-raw_includes_users = pd.read_json('./Data/Breyer_includes_users.json',orient='records',lines=True)
-raw_meta = pd.read_json('./Data/Breyer_meta.json',orient='records',lines=True)
-raw_kyiv_errors = pd.read_json('./Data/Breyer_errors.json',orient='value',lines=True)
-pd.melt(raw_kyiv_errors).dropna(subset=['value']).value.apply(pd.Series)
+##### read the saved data from method 2
+raw_data = pd.read_json(ROOT_DIR+'/Data/Breyer_data.json',orient='records',lines=True)
+raw_includes_tweets = pd.read_json(ROOT_DIR+'/Data/Breyer_includes_tweets.json',orient='records',lines=True)
+raw_includes_users = pd.read_json(ROOT_DIR+'/Data/Breyer_includes_users.json',orient='records',lines=True)
+raw_meta = pd.read_json(ROOT_DIR+'/Data/Breyer_meta.json',orient='records',lines=True)
+raw_errors = pd.read_json(ROOT_DIR+'/Data/Breyer_errors.json',orient='value',lines=True)
+pd.melt(raw_errors).dropna(subset=['value']).value.apply(pd.Series)
 
 #%%
 ##### request a certain amount of tweets with one line #####
-search_tweets = tweepy.Paginator(api.search_all_tweets, search_query, expansions=expansions,tweet_fields=target_tweet_fields,max_results=100).flatten(limit=500)
+search_tweets = tweepy.Paginator(api.search_all_tweets, search_query, expansions=expansions,tweet_fields=target_tweet_fields,max_results=100).flatten(limit=1000)
 pd.DataFrame(search_tweets)
 
 #%%
