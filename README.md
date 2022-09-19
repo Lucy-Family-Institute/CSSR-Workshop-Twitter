@@ -1,5 +1,5 @@
 # Twitter Data and Social Science Study
-Author: Yang Xu(yxu6@nd.edu)
+Author: Yang Xu (yxu6@nd.edu)
 
 ## IMPORTANT INFORMATION
 
