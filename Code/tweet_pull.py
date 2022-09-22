@@ -80,7 +80,7 @@ pd.DataFrame(user_timelines.includes['users'],dtype='object')
 pd.DataFrame(user_timelines.includes['tweets'],dtype='object')
 
 #%%
-##### get tweets a certainuser liked #####
+##### get tweets a certain user liked #####
 user_id = api.get_user(username='taylorswift13')
 target_tweet_fields = ['author_id','context_annotations','conversation_id','created_at','entities']
 expansions = ['referenced_tweets.id','in_reply_to_user_id']

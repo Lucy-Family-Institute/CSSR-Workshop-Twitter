@@ -14,45 +14,87 @@ import ast
 from datetime import timezone
 
 os.getcwd()
-# ROOT_DIR = '/Users/yxu6/Alego/CSSR-Workshop-Twitter/'
 ROOT_DIR = os.path.split(os.getcwd())[0]
+# or
+ROOT_DIR = '/where/the/data/is/saved/'
 # os.chdir()
 
 ##### read the saved data
 ####### method 1
-raw_data = pd.read_csv('./Data/Breyer_data_2022_02.csv',sep='\t',dtype=object).dropna(subset=['id'])
-raw_includes_tweets = pd.read_csv('./Data/Breyer_reference_tweets_2022_02.csv',sep='\t',dtype=object).dropna(subset=['id'])
-raw_includes_users = pd.read_csv('./Data/Breyer_reference_users_2022_02.csv',sep='\t',dtype=object).dropna(subset=['id'])
-raw_error = pd.read_csv('./Data/Breyer_errors_2022_02.csv',sep='\t',dtype=object)
-raw_meta = pd.read_csv('./Data/Breyer_meta_2022_02.csv',sep='\t',dtype=object)
+###### KyivPost
+KyivPost_raw_data = pd.read_csv(ROOT_DIR+'/Data/KyivPost_data.csv',sep='\t',dtype=object).dropna(subset=['id'])
+KyivPost_raw_includes_tweets = pd.read_csv(ROOT_DIR+'/Data/KyivPost_referenced_tweets.csv',sep='\t',dtype=object).dropna(subset=['id'])
+KyivPost_raw_includes_users = pd.read_csv(ROOT_DIR+'/Data/KyivPost_referenced_users.csv',sep='\t',dtype=object).dropna(subset=['id'])
+KyivPost_raw_error = pd.read_csv(ROOT_DIR+'/Data/KyivPost_errors.csv',sep='\t',dtype=object)
+KyivPost_raw_meta = pd.read_csv(ROOT_DIR+'/Data/KyivPost_meta.csv',sep='\t',dtype=object)
+
+###### RT_com
+RT_com_raw_data = pd.read_csv(ROOT_DIR+'/Data/RT_com_data.csv',sep='\t',dtype=object).dropna(subset=['id'])
+RT_com_raw_includes_tweets = pd.read_csv(ROOT_DIR+'/Data/RT_com_referenced_tweets.csv',sep='\t',dtype=object).dropna(subset=['id'])
+RT_com_raw_includes_users = pd.read_csv(ROOT_DIR+'/Data/RT_com_referenced_users.csv',sep='\t',dtype=object).dropna(subset=['id'])
+RT_com_raw_error = pd.read_csv(ROOT_DIR+'/Data/RT_com_errors.csv',sep='\t',dtype=object)
+RT_com_raw_meta = pd.read_csv(ROOT_DIR+'/Data/RT_com_meta.csv',sep='\t',dtype=object)
 
 ####### method 2
-raw_data = pd.read_json('./Data/Breyer_data.json',orient='records',lines=True)
-raw_includes_tweets = pd.read_json('./Data/Breyer_includes_tweets.json',orient='records',lines=True)
-raw_includes_users = pd.read_json('./Data/Breyer_includes_users.json',orient='records',lines=True)
-raw_meta = pd.read_json('./Data/Breyer_meta.json',orient='records',lines=True)
+###### KyivPost
+KyivPost_raw_data = pd.read_json(ROOT_DIR+'/Data/KyivPost_data.json',orient='records',lines=True,dtype=object)
+KyivPost_raw_includes_tweets = pd.read_json(ROOT_DIR+'/Data/KyivPost_includes_tweets.json',orient='records',lines=True,dtype=object)
+KyivPost_raw_includes_users = pd.read_json(ROOT_DIR+'/Data/KyivPost_includes_users.json',orient='records',lines=True,dtype=object)
+KyivPost_raw_meta = pd.read_json(ROOT_DIR+'/Data/KyivPost_meta.json',orient='records',lines=True,dtype=object)
 
-# method1
-raw_errors = []
-with open('./Data/Breyer_errors.json', 'r') as r:
+# option1
+KyivPost_raw_error = []
+with open(ROOT_DIR+'/Data/KyivPost_errors.json', 'r') as r:
     for line in r:
         temp = json.loads(line)
         if temp:
-            raw_errors.append(pd.DataFrame(temp))
-            # raw_Breyer_errors.append(json.loads(line))
-raw_errors = pd.concat(raw_errors)
+            KyivPost_raw_error.append(pd.DataFrame(temp))
+KyivPost_raw_error = pd.concat(KyivPost_raw_error)
 
-# method2
-raw_errors = pd.read_json('./Data/Breyer_errors.json',orient='value',lines=True)
-pd.melt(raw_errors).dropna(subset=['value']).value.apply(pd.Series)
+# option2
+KyivPost_raw_error = pd.read_json(ROOT_DIR+'/Data/KyivPost_errors.json',orient='value',lines=True,dtype=object)
+pd.melt(KyivPost_raw_error).dropna(subset=['value']).value.apply(pd.Series)
+
+###### RT.com
+RT_com_raw_data = pd.read_json(ROOT_DIR+'/Data/RT_com_data.json',orient='records',lines=True,dtype=object)
+RT_com_raw_includes_tweets = pd.read_json(ROOT_DIR+'/Data/RT_com_includes_tweets.json',orient='records',lines=True,dtype=object)
+RT_com_raw_includes_users = pd.read_json(ROOT_DIR+'/Data/RT_com_includes_users.json',orient='records',lines=True,dtype=object)
+RT_com_raw_meta = pd.read_json(ROOT_DIR+'/Data/RT_com_meta.json',orient='records',lines=True,dtype=object)
+
+# option1
+RT_com_raw_error = []
+with open(ROOT_DIR+'/Data/RT_com_errors.json', 'r') as r:
+    for line in r:
+        temp = json.loads(line)
+        if temp:
+            RT_com_raw_error.append(pd.DataFrame(temp))
+            # raw_RT_com_errors.append(json.loads(line))
+RT_com_raw_error = pd.concat(RT_com_raw_error)
+
+# option2
+RT_com_raw_error = pd.read_json(ROOT_DIR+'/Data/RT_com_errors.json',orient='value',lines=True,dtype=object)
+pd.melt(RT_com_raw_error).dropna(subset=['value']).value.apply(pd.Series)
+
+### concatenate data of KyivPost and RT_com
+raw_data = pd.concat([KyivPost_raw_data.assign(source="KyivPost"), RT_com_raw_data.assign(source="RT_com")],ignore_index=True)
+raw_includes_tweets = pd.concat([KyivPost_raw_includes_tweets.assign(source="KyivPost"), RT_com_raw_includes_tweets.assign(source="RT_com")],ignore_index=True)
+raw_includes_users = pd.concat([KyivPost_raw_includes_users.assign(source="KyivPost"), RT_com_raw_includes_users.assign(source="RT_com")],ignore_index=True)
+raw_error = pd.concat([KyivPost_raw_error.assign(source="KyivPost"), RT_com_raw_error.assign(source="RT_com")],ignore_index=True)
+raw_meta = pd.concat([KyivPost_raw_meta.assign(source="KyivPost"), RT_com_raw_meta.assign(source="RT_com")],ignore_index=True)
+
+# delete redundant data
+del(RT_com_raw_data,RT_com_raw_error,RT_com_raw_meta,RT_com_raw_includes_users,RT_com_raw_includes_tweets)
+del(KyivPost_raw_data,KyivPost_raw_error,KyivPost_raw_meta,KyivPost_raw_includes_users,KyivPost_raw_includes_tweets)
 
 ##### summarize the data
-raw_data.describe().T
+# raw_data.describe(include='all', datetime_is_numeric=True).T
 raw_data.dtypes
-raw_includes_tweets.describe().T
-raw_includes_users.describe().T
-raw_error.describe().T
-raw_meta.describe().T
+raw_includes_tweets.describe(include='all', datetime_is_numeric=True).T
+raw_includes_tweets.dtypes
+raw_includes_users.describe(include='all', datetime_is_numeric=True).T
+raw_includes_users.dtypes
+raw_error
+raw_meta
 
 ##### glimpse the data
 raw_data.head()
@@ -71,12 +113,13 @@ pd.json_normalize(temp,sep="_")
 
 temp = raw_data.loc[0,'entities']
 type(temp)
+temp.keys()
 # temp_json = ast.literal_eval(temp)
 # type(temp_json)
-pd.json_normalize(temp['annotations'],sep="_")
-pd.json_normalize(temp['urls'],sep="_")
-
-raw_data.head()
+# pd.json_normalize(temp['annotations'],sep="_")
+pd.json_normalize(temp['hashtags'],sep="_")
+# pd.json_normalize(temp['urls'],sep="_")
+pd.json_normalize(temp['mentions'],sep="_")
 
 #### define functions to parse the json data
 def context_flatten(id,context_annotations):
@@ -132,30 +175,15 @@ mention_data = pd.concat(mention_list,ignore_index=True)
 hashtag_data = pd.concat(hashtag_list,ignore_index=True)
 cashtag_data = pd.concat(cashtag_list,ignore_index=True)
 
-context_data.to_csv("./Data/context_data.csv",index=False,sep='\t')
-annotations_data.to_csv("./Data/annotations_data.csv",index=False,sep='\t')
-urls_data.to_csv("./Data/urls_data.csv",index=False,sep='\t')
-mention_data.to_csv("./Data/mentions_data.csv",index=False,sep='\t')
-hashtag_data.to_csv("./Data/hashtags_data.csv",index=False,sep='\t')
-cashtag_data.to_csv("./Data/cashtags_data.csv",index=False,sep='\t')
+context_data.to_csv(ROOT_DIR+"/Data/context_data.csv",index=False,sep='\t')
+annotations_data.to_csv(ROOT_DIR+"/Data/annotations_data.csv",index=False,sep='\t')
+urls_data.to_csv(ROOT_DIR+"/Data/urls_data.csv",index=False,sep='\t')
+mention_data.to_csv(ROOT_DIR+"/Data/mentions_data.csv",index=False,sep='\t')
+hashtag_data.to_csv(ROOT_DIR+"/Data/hashtags_data.csv",index=False,sep='\t')
+cashtag_data.to_csv(ROOT_DIR+"/Data/cashtags_data.csv",index=False,sep='\t')
 
 urls_data.describe(include='all').T
 
-#### parse the raw_includes_tweets
-
-raw_includes_tweets.loc[raw_includes_tweets.context_annotations.isna()]
-raw_includes_tweets_subset = raw_includes_tweets.dropna(subset=['context_annotations'])
-
-includes_context_list = context_flatten_vct(raw_includes_tweets_subset.id, raw_includes_tweets_subset.context_annotations)
-includes_context_data = pd.concat(context_list,ignore_index=True)
-
-raw_includes_tweets_subset = raw_includes_tweets.dropna(subset=['entities'])
-includes_annotations_list,includes_urls_list,includes_mention_list,includes_hashtag_list,includes_cashtag_list = entities_flatten_vct(raw_includes_tweets_subset.id, raw_includes_tweets_subset.entities)
-includes_annotations_data = pd.concat(includes_annotations_list,ignore_index=True)
-includes_urls_data = pd.concat(includes_urls_list,ignore_index=True)
-includes_mention_data = pd.concat(includes_mention_list,ignore_index=True)
-includes_hashtag_data = pd.concat(includes_hashtag_list,ignore_index=True)
-includes_cashtag_data = pd.concat(includes_cashtag_list,ignore_index=True)
 
 #### For those prefer a python-style programmers, bleow is an alternative to parse in a 'pythonic' way
 
@@ -182,19 +210,46 @@ cashtags_data.reset_index(level=1,drop=True).reset_index(level=0)
 raw_data = raw_data.drop(['context_annotations','entities'],axis=1)
 
 raw_includes_tweets.head()
-
 #### Practice: Parse raw_include on your own
 #### Item1: parse column context_annotations into another dataframe called: includes_context_data
 #### Item2: parse column entities into another two dataframes called: includes_annotations_data and includes_url_data
 #### Item3: parse column includesd_tweets into another two columns: includesd_id and includesd_tweets, then delete column: includesd_tweets
 #### Item4: parse column public_metrics into another four columns: retweet_count, reply_count, like_count, quote_count, then delete column: public_metrics
 
-#### parse column includesd_tweets into two columns: includesd_id, includesd_type
+#### parse the raw_includes_tweets
+
+raw_includes_tweets.loc[raw_includes_tweets.context_annotations.isna()]
+raw_includes_tweets_subset = raw_includes_tweets.dropna(subset=['context_annotations'])
+
+includes_context_list = context_flatten_vct(raw_includes_tweets_subset.id, raw_includes_tweets_subset.context_annotations)
+includes_context_data = pd.concat(context_list,ignore_index=True)
+
+raw_includes_tweets_subset = raw_includes_tweets.dropna(subset=['entities'])
+includes_annotations_list,includes_urls_list,includes_mention_list,includes_hashtag_list,includes_cashtag_list = entities_flatten_vct(raw_includes_tweets_subset.id, raw_includes_tweets_subset.entities)
+includes_annotations_data = pd.concat(includes_annotations_list,ignore_index=True)
+includes_urls_data = pd.concat(includes_urls_list,ignore_index=True)
+includes_mention_data = pd.concat(includes_mention_list,ignore_index=True)
+includes_hashtag_data = pd.concat(includes_hashtag_list,ignore_index=True)
+includes_cashtag_data = pd.concat(includes_cashtag_list,ignore_index=True)
+
+
+#### parse column referenced_tweets into two columns: referenced_id, referenced_type
 temp = raw_data.loc[~raw_data.referenced_tweets.isna(),['id','referenced_tweets']]
-temp = raw_data.loc[1,'referenced_tweets']
+temp = raw_data.loc[2,'referenced_tweets']
 type(temp[0])
 #pd.DataFrame(raw_data.referenced_tweets).explode('referenced_tweets')
-raw_data[['referenced_type','referenced_id']] = raw_data.referenced_tweets.explode().apply(pd.Series).drop(0,axis=1)
+
+reference_tweets_data = raw_data.referenced_tweets.explode().apply(pd.Series).drop(0,axis=1)
+reference_tweets_data = reference_tweets_data.loc[~reference_tweets_data.index.duplicated()]
+reference_tweets_data.describe().T
+reference_tweets_data.type.value_counts()
+raw_data[['referenced_type','referenced_id']] = reference_tweets_data
+raw_data[['referenced_type','referenced_id']].dtypes
+del(reference_tweets_data)
+
+    # temp.loc[temp.index.duplicated(keep=False)]
+# raw_data.iloc[4976,:]
+
 #raw_data.referenced_tweets.str.extract(r"type\'\:\s+\'(\w+)\'\,\s+\'id\'\:\s+\'(\d+)", expand=True).rename(columns={0:"referenced_id",1:"referenced_type"})
 raw_data.loc[~raw_data.referenced_tweets.isna(),['referenced_tweets','referenced_id','referenced_type']]
 #### then delete the original column referenced_tweets
@@ -209,7 +264,7 @@ raw_data[['public_metrics','retweet_count','reply_count','like_count','quote_cou
 #### then delete the original column public_metrics
 raw_data = raw_data.drop('public_metrics', axis=1)
 #### summarize the four new columns
-raw_data[['retweet_count','reply_count','like_count','quote_count']].describe()
+raw_data[['retweet_count','reply_count','like_count','quote_count']].describe().T
 
 #### convert column created_at to US Eastern Time
 raw_data['created_at']
@@ -217,7 +272,7 @@ raw_data['created_at'] = pd.to_datetime(raw_data['created_at']).dt.tz_convert('U
 raw_data['created_at']
 
 #### the convertsion is DST sensitive
-dst_test = pd.Series(['2022-03-13T06:00:01Z','2022-03-13T07:00:01Z','2022-03-13T08:00:01Z'])
+dst_test = pd.Series(['2022-11-06T05:00:01Z','2022-11-06T06:00:01Z','2022-11-06T07:00:01Z'])
 pd.to_datetime(dst_test).dt.tz_convert('US/Eastern')
 
 raw_includes_tweets.describe().T
@@ -232,22 +287,23 @@ raw_includes_tweets
 
 #### merge raw_data with referenced_tweets
 raw_includes_tweets_subset = raw_includes_tweets[['id','text']].rename(columns={'id':'referenced_id','text':'referenced_text'}).drop_duplicates(subset=['referenced_id'])
-raw_includes_tweets_subset.referenced_id = raw_includes_tweets_subset.referenced_id.astype(float)
-raw_data.referenced_id = raw_data.referenced_id.astype(str)
-raw_includes_tweets_subset.dtypes
-raw_data.dtypes
-raw_data.loc[~raw_data.referenced_id.isna(),'referenced_id']
-data_with_referenced_text = raw_data.merge(raw_includes_tweets_subset, how='left', on='referenced_id')
-data_with_referenced_text[['id','text','referenced_text']]
+#raw_data_subset = raw_data.loc[~raw_data.referenced_id.isna()]
+# raw_includes_tweets_subset.dtypes
+raw_includes_tweets.dtypes
+
+data_with_referenced_text = raw_data.merge(raw_includes_tweets_subset, how='left', on='referenced_id',indicator=True)
+data_with_referenced_text[['id','text','referenced_type','referenced_id','referenced_text']]
 data_with_referenced_text['all_text'] = data_with_referenced_text.text +" "+ data_with_referenced_text.referenced_text.fillna('')
 data_with_referenced_text[['id','text','referenced_text','all_text']]
 data_with_referenced_text.loc[0,'all_text']
 data_with_referenced_text.loc[0,'text']
 data_with_referenced_text.loc[0,'referenced_text']
 
-data_with_referenced_text.to_csv("./Data/cleaned_data.csv",index=False,sep='\t')
+data_with_referenced_text.to_csv(ROOT_DIR+"/Data/cleaned_data.csv",index=False,sep='\t')
 
 #### Filter data by conditions
 data_with_referenced_text
 data_with_referenced_text.loc[data_with_referenced_text.like_count>50]
-data_with_referenced_text.sort_values(by='like_count',ascending=False)[['id','all_text','retweet_count','reply_count','like_count','quote_count']]
+data_with_referenced_text.sort_values(by='like_count',ascending=False)[['id','all_text','retweet_count','reply_count','like_count','quote_count','source']]
+
+#%%
