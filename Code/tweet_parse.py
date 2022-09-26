@@ -221,16 +221,6 @@ raw_includes_tweets.head()
 raw_includes_tweets.loc[raw_includes_tweets.context_annotations.isna()]
 raw_includes_tweets_subset = raw_includes_tweets.dropna(subset=['context_annotations'])
 
-includes_context_list = context_flatten_vct(raw_includes_tweets_subset.id, raw_includes_tweets_subset.context_annotations)
-includes_context_data = pd.concat(context_list,ignore_index=True)
-
-raw_includes_tweets_subset = raw_includes_tweets.dropna(subset=['entities'])
-includes_annotations_list,includes_urls_list,includes_mention_list,includes_hashtag_list,includes_cashtag_list = entities_flatten_vct(raw_includes_tweets_subset.id, raw_includes_tweets_subset.entities)
-includes_annotations_data = pd.concat(includes_annotations_list,ignore_index=True)
-includes_urls_data = pd.concat(includes_urls_list,ignore_index=True)
-includes_mention_data = pd.concat(includes_mention_list,ignore_index=True)
-includes_hashtag_data = pd.concat(includes_hashtag_list,ignore_index=True)
-includes_cashtag_data = pd.concat(includes_cashtag_list,ignore_index=True)
 
 
 #### parse column referenced_tweets into two columns: referenced_id, referenced_type
@@ -246,9 +236,6 @@ reference_tweets_data.type.value_counts()
 raw_data[['referenced_type','referenced_id']] = reference_tweets_data
 raw_data[['referenced_type','referenced_id']].dtypes
 del(reference_tweets_data)
-
-    # temp.loc[temp.index.duplicated(keep=False)]
-# raw_data.iloc[4976,:]
 
 #raw_data.referenced_tweets.str.extract(r"type\'\:\s+\'(\w+)\'\,\s+\'id\'\:\s+\'(\d+)", expand=True).rename(columns={0:"referenced_id",1:"referenced_type"})
 raw_data.loc[~raw_data.referenced_tweets.isna(),['referenced_tweets','referenced_id','referenced_type']]

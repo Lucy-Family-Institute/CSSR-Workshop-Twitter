@@ -1,22 +1,33 @@
 """
 Author: Yang Xu(yxu6@nd.edu)
-Purpose: Workshop for twitter data pulling, session 3.
+Purpose: Workshop for twitter data and social science, session 3.
          The code includes how to apply established model to analyze the data.
 """
 import os
-import openai
+# import openai
 import yaml
 import pandas as pd
 import nltk
+import matplotlib.pyplot as plt
+import itertools
+from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
+import numpy as np
+from collections import Counter
 
+
+os.getcwd()
+ROOT_DIR = os.path.split(os.getcwd())[0]
+# or
+ROOT_DIR = '/where/the/data/is/saved/'
+# os.chdir()
 
 #### Load the data ####
-cleaned_data = pd.read_csv("./Data/cleaned_data.csv",dtype="object",sep='\t')
-context_data = pd.read_csv("./Data/context_data.csv",dtype="object",sep='\t')
-annotations_data = pd.read_csv("./Data/annotations_data.csv",dtype="object",sep='\t')
-urls_data = pd.read_csv("./Data/urls_data.csv",dtype="object",sep='\t')
-mention_data = pd.read_csv("./Data/mentions_data.csv",dtype="object",sep='\t')
-hashtag_data = pd.read_csv("./Data/hashtags_data.csv",dtype="object",sep='\t')
+cleaned_data = pd.read_csv(ROOT_DIR+"/Data/cleaned_data.csv",dtype="object",sep='\t')
+context_data = pd.read_csv(ROOT_DIR+"/Data/context_data.csv",dtype="object",sep='\t')
+annotations_data = pd.read_csv(ROOT_DIR+"/Data/annotations_data.csv",dtype="object",sep='\t')
+urls_data = pd.read_csv(ROOT_DIR+"/Data/urls_data.csv",dtype="object",sep='\t')
+mention_data = pd.read_csv(ROOT_DIR+"/Data/mentions_data.csv",dtype="object",sep='\t')
+hashtag_data = pd.read_csv(ROOT_DIR+"/Data/hashtags_data.csv",dtype="object",sep='\t')
 
 #### Descriptive Analysis
 
@@ -25,18 +36,81 @@ tweet_entities = context_data.groupby('tweet_id')['entity_name'].unique().reset_
 tweet_entities.head()
 temp = context_data.entity_name.value_counts()
 temp[0:30]
-target_tweet_id = context_data.loc[context_data.entity_name=="Dick Durbin"].tweet_id.unique()
+target_tweet_id = context_data.loc[context_data.entity_name=="Vladimir Putin"].tweet_id.unique()
 cleaned_data.loc[cleaned_data.id.isin(target_tweet_id),'text']
 
 tweet_annotations = annotations_data.groupby('tweet_id')['normalized_text'].unique().reset_index()
 temp = annotations_data.normalized_text.value_counts()
 temp[0:30]
 
+##### Word Cloud for the top entities
+# type(tweet_annotations.iloc[0,1])
+text = [x.tolist() for x in tweet_annotations.normalized_text]
+text2 = itertools.chain.from_iterable(text)
+text2 = [str(element) for element in text2]
+wordcloud = WordCloud(width=1000, height=500, max_words=80).generate_from_frequencies(Counter(text2))
+plt.figure(figsize=[100,50])
+plt.imshow(wordcloud, interpolation="bilinear")
+plt.axis("off")
+plt.show()
+
+##### separate annotations between KyivPost and RT_com
+annotations_source = tweet_annotations.merge(cleaned_data[['id', 'source']], left_on='tweet_id', right_on='id', how='left')
+
+KyivPost_annotations = [x.tolist() for x in annotations_source.loc[annotations_source.source=='KyivPost','normalized_text']]
+KyivPost_annotations_string = itertools.chain.from_iterable(KyivPost_annotations)
+KyivPost_annotations_string = [str(element) for element in KyivPost_annotations_string]
+
+RT_com_annotations = [x.tolist() for x in annotations_source.loc[annotations_source.source=='RT_com','normalized_text']]
+RT_com_annotations_string = itertools.chain.from_iterable(RT_com_annotations)
+RT_com_annotations_string = [str(element) for element in RT_com_annotations_string]
+
+wordcloud_KyivPost = WordCloud(width=1000, height=500, max_words=80).generate_from_frequencies(Counter(KyivPost_annotations_string))
+wordcloud_RT_com = WordCloud(width=1000, height=500, max_words=80).generate_from_frequencies(Counter(RT_com_annotations_string))
+
+plt.figure(figsize=[50,20])
+plt.subplot(1,2,1)
+plt.imshow(wordcloud_KyivPost, interpolation="bilinear")
+plt.axis("off")
+plt.title("Kyiv Post Top Annotations", fontdict = {'fontsize' : 60})
+plt.subplot(1,2,2)
+plt.imshow(wordcloud_RT_com, interpolation="bilinear")
+plt.axis("off")
+plt.title("RT_com Top Annotations", fontdict = {'fontsize' : 60})
+plt.show()
+
+##### separate entities between KyivPost and RT_com
+tweet_entities = context_data.groupby('tweet_id')['entity_name'].unique().reset_index()
+
+entities_source = tweet_entities.merge(cleaned_data[['id', 'source']], left_on='tweet_id', right_on='id', how='left')
+
+KyivPost_entities = [x.tolist() for x in entities_source.loc[entities_source.source=='KyivPost','entity_name']]
+KyivPost_entities_string = itertools.chain.from_iterable(KyivPost_entities)
+KyivPost_entities_string = [str(element) for element in KyivPost_entities_string]
+
+RT_com_entities = [x.tolist() for x in entities_source.loc[entities_source.source=='RT_com','entity_name']]
+RT_com_entities_string = itertools.chain.from_iterable(RT_com_entities)
+RT_com_entities_string = [str(element) for element in RT_com_entities_string]
+
+wordcloud_KyivPost = WordCloud(width=1000, height=500, max_words=80).generate_from_frequencies(Counter(KyivPost_entities_string))
+wordcloud_RT_com = WordCloud(width=1000, height=500, max_words=80).generate_from_frequencies(Counter(RT_com_entities_string))
+
+plt.figure(figsize=[50,20])
+plt.subplot(1,2,1)
+plt.imshow(wordcloud_KyivPost, interpolation="bilinear")
+plt.axis("off")
+plt.title("Kyiv Post Top Annotations", fontdict = {'fontsize' : 60})
+plt.subplot(1,2,2)
+plt.imshow(wordcloud_RT_com, interpolation="bilinear")
+plt.axis("off")
+plt.title("RT_com Top Annotations", fontdict = {'fontsize' : 60})
+plt.show()
+
 ##### domains associated with each tweet
-tweet_domains = context_data.groupby('tweet_id')['domain_name'].unique().reset_index()
+tweet_domains = context_data.groupby('tweet_id')['entity_name'].unique().reset_index()
 tweet_domains.head(n=10)
 ##### domains frequency by domain
-temp = context_data.domain_name.value_counts()
+temp = context_data.entity_name.value_counts()
 temp.iloc[0:30]
 
 
@@ -51,7 +125,6 @@ temp = hashtag_data.tag.value_counts()
 data_plot = temp[0:30].reset_index().rename(columns={'index':'hashtag','tag':'counts'})
 data_plot.head()
 
-import matplotlib.pyplot as plt
 plt.bar(data_plot['hashtag'],data_plot['counts'])
 
 
