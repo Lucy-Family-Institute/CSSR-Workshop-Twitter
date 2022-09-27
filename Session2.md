@@ -4,14 +4,14 @@
 > By now you should be able to pull data through Twitter API
 > The API send the data that includes 4 sections:
 >    - **data**
->    - **includes**: has two sub-sections: referenced_tweets, referenced_users
+>    - **includes**: has two sub-sections: includes_tweets, includes_users
 >    - **error**
 >    - **meta**
 >
 > The data should be consisted of 4 or 5 files:
 >    - **raw_data**: pulled tweets based on the request
->    - **raw_reference_tweets**: contains tweets that have been referenced by the tweets in the **raw_data**
->    - **raw_reference_users**(optional): user information associated with the **raw_reference_tweets**
+>    - **raw_includes_tweets**: contains tweets that have been referenced by the tweets in the **raw_data**
+>    - **raw_includes_users**(optional): user information associated with the **raw_includes_tweets**
 >    - **raw_errors**: error messages when pulling tweets
 >    - **raw_meta**: meta data generated when pulling tweets
 
@@ -20,7 +20,7 @@
 > 2. Parse **context annotations**, **entities**
 > 3. Parse **referenced_tweet**, **public_metrics**
 > 4. Convert **created_at**
-> 5. Merge **raw_data** & **raw_reference_tweets**
+> 5. Merge **raw_data** & **raw_includes_tweets**
 > 6. Filter data by condition
 
 ## Context Annotations and Entities
@@ -37,7 +37,7 @@
 > - [More detail](https://developer.twitter.com/en/docs/twitter-api/annotations/overview)
 
 ## Explore
-> Read csv file with ```pd.read_csv```
+> Read csv file with ```pd.read_csv```, read json file with ```pd.read_json```
 >    - specify ```dtype=object```, so the long id number is kept in full
 >    - the default ```sep``` is comma
 >
@@ -50,7 +50,7 @@
 >
 > Glimpse the data with the first five rows
 >    - use ```raw_data.head()```
->    - It is often useful to check a few rows so we have an idea what the data look like
+>    - It is often useful to check a few rows, so we have an idea what the data look like
 >
 > Further checking by indexing
 >    - use ```raw_data.loc[0,"context_annotations"]```
@@ -84,8 +84,8 @@
 >    - The function returns a dataframe or multiple dataframes
 >    - The associated tweet id can be used to merge with the original text
 >
-> #### Parse ```referenced_tweets```, ```public_metrics``` ####
->    - The referenced_tweets can be parsed within the original data
+> #### Parse ```includes_tweets```, ```public_metrics``` ####
+>    - The includes_tweets can be parsed within the original data
 >    - Use **regex**
 >         - ```\d```:digits [0-9]
 >         - ```\w```:alphanumeric [A-Za-z0-9_]

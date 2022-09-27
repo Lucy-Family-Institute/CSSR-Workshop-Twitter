@@ -209,18 +209,18 @@ cashtags_data.reset_index(level=1,drop=True).reset_index(level=0)
 
 raw_data = raw_data.drop(['context_annotations','entities'],axis=1)
 
+
 raw_includes_tweets.head()
+
 #### Practice: Parse raw_include on your own
 #### Item1: parse column context_annotations into another dataframe called: includes_context_data
 #### Item2: parse column entities into another two dataframes called: includes_annotations_data and includes_url_data
-#### Item3: parse column includesd_tweets into another two columns: includesd_id and includesd_tweets, then delete column: includesd_tweets
-#### Item4: parse column public_metrics into another four columns: retweet_count, reply_count, like_count, quote_count, then delete column: public_metrics
 
 #### parse the raw_includes_tweets
 
 raw_includes_tweets.loc[raw_includes_tweets.context_annotations.isna()]
 raw_includes_tweets_subset = raw_includes_tweets.dropna(subset=['context_annotations'])
-
+#### try to write code to complete the tasks above
 
 
 #### parse column referenced_tweets into two columns: referenced_id, referenced_type
@@ -258,7 +258,7 @@ raw_data['created_at']
 raw_data['created_at'] = pd.to_datetime(raw_data['created_at']).dt.tz_convert('US/Eastern')
 raw_data['created_at']
 
-#### the convertsion is DST sensitive
+#### the conversion is DST sensitive
 dst_test = pd.Series(['2022-11-06T05:00:01Z','2022-11-06T06:00:01Z','2022-11-06T07:00:01Z'])
 pd.to_datetime(dst_test).dt.tz_convert('US/Eastern')
 
@@ -266,11 +266,13 @@ raw_includes_tweets.describe().T
 raw_includes_tweets.head()
 
 #### Practice: Parse raw_includes_tweets on your own
-#### Item3: parse column includes_tweets into another two columns: includes_id and includes_type, then delete column: includes_tweets
+#### Item3: parse column referenced_tweets into another two columns: referenced_id and referenced_type, then delete column: referenced_tweets
 #### Item4: parse column public_metrics into another four columns: retweet_count, reply_count, like_count, quote_count, then delete column: public_metrics
 #### Item5: convert column created_at to US Eastern Time
 raw_data
 raw_includes_tweets
+
+#### write code to complete the tasks above
 
 #### merge raw_data with referenced_tweets
 raw_includes_tweets_subset = raw_includes_tweets[['id','text']].rename(columns={'id':'referenced_id','text':'referenced_text'}).drop_duplicates(subset=['referenced_id'])
