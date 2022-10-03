@@ -45,6 +45,10 @@
 > - Join multiple entities by ```tweet_id```, to piece together what entities each tweet has
 > - Join the hashtags or mentions for each tweet
 > - Counts the frequency of hashtags and mentions
+
+## Visualization
+> - install `pip install wordcloud` for plotting wordcloud
+> - install `pip install networkx`, in case bug reported, try `pip install networkx==2.6.3`
 >
 ## Sentiment Analysis
 > **What is sentiment analysis?**

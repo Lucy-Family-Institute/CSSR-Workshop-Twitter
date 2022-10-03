@@ -333,8 +333,8 @@ sentiment_result = pd.DataFrame(result)[0].astype(str).str.split(r"→",expand=T
 sentiment_result[['sentiment','confidence']] = sentiment_result['confidence'].str.split("\s+\(", expand=True).rename(columns={0:'label',1:'confidence'})
 sentiment_result['confidence'] = sentiment_result['confidence'].str.replace(r'\)',"", regex=True).astype(float)
 sentiment_result = sentiment_result[['label', 'sentiment', 'confidence']]
-sentiment_result
 sentiment_result.describe(include='all')
+sentiment_result
 
 #%%
 #### BERTweet
@@ -352,7 +352,7 @@ with torch.no_grad():
 features[1]
 
 #%%
-#### openapi
+#### openai
 # with open(ROOT_DIR+"/Code/twitter_credential_true.yaml", 'r') as stream:
     # OPENAI_API_KEY = yaml.safe_load(stream)['openapi_api-keys']
 OPENAI_API_KEY=""
